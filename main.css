@@ -1,0 +1,56 @@
+html {
+    min-width: 100vw;
+    min-height: 100vh;
+    box-sizing: border-box !important;
+}
+
+.nav-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 60px;
+    background-color: grey;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-left {
+    position: absolute;
+    left: 0;
+    font-size: 32px;
+}
+
+.nav-right {
+    font-size: 26px;
+}
+
+.nav-item {
+    padding: 0 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.hero {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    height: calc(100vh - 60px);
+    width: 100vw;
+}
+
+.content {
+    width: 320px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
