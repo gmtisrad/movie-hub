@@ -23,15 +23,11 @@ html {
 .nav-left {
     position: absolute;
     left: 0;
-    font-size: 32px;
-}
-
-.nav-right {
     font-size: 26px;
 }
 
 .nav-item {
-    padding: 0 10px;
+    margin: 0 10px;
 }
 
 .hidden {
@@ -53,6 +49,7 @@ html {
     display: flex;
     align-content: center;
     flex-direction: column;
+    justify-content: flex-start;
 }
 
 .search-page {
@@ -95,8 +92,98 @@ html {
     margin: 10px auto;
 }
 
+.main-movie-title {
+    font-weight: 600;
+    margin: 0;
+}
+
+.main-release-date {
+    font-weight: 300;
+    font-size: 18px;
+    margin: 0 0 10px 0;
+}
+
+.main-description {
+    font-size: 18px;
+    line-height: 1;
+    margin: 0;
+}
+
+.movie-information {
+    box-sizing: border-box;
+    margin: 10px 0;
+}
+
+.main-movie-poster {
+    width: 50%;
+    height: auto;
+    display: inline-block;
+    float: left;
+    padding-right: 10px;
+}
+
+.main-movie-poster img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 #more-button {
     padding: 25px 0px;
     margin: 0 auto;
     width: 120px;
+}
+
+.movie-reviews {
+    height: 240px;
+    min-width: 320px;
+    max-width: 320px;
+    max-height: 240px;
+    display: flex;
+    flex-direction: row;
+}
+.scores {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 100px;
+    min-width: 100px;
+    border: 1px solid black;
+    border-right: none;
+}
+
+.review-heading {
+    text-align: center;
+    height: 20px;
+    margin: 0;
+    border-bottom: 1px solid black;
+}
+
+.reviews {
+    height: 100%;
+    max-width: 220px;
+    min-width: 220px;
+    max-height: 240px;
+    border: 1px solid black;
+}
+
+.review {
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 0 10px;
+    border-bottom: 1px solid black;
+}
+
+.review p {
+    margin: 10px;
+}
+
+.reviews-list {
+    list-style: none;
+    max-height: 220px;
+    overflow: scroll;
+    padding: 0;
+    margin: 0;
 }
