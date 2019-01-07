@@ -15,14 +15,36 @@
         <div class='nav-item nav-right js-nav-contact'>Contact</div>
     </nav>
     <main class='hero js-hero'>
-        <div class='content'>
+        <section class='content'>
+            <h1 class='results-header'>Results</h1>
+            <span class='num-results'>Showing x out of y</span>
+            <section class='results js-results'>
+                <ul class='results-list js-results-list'>
+                    <li class='result-item js-result-item'>
+                        <img src='http://placekitten.com/g/90/90' class='movie-poster js-movie-poster' alt='movie poster'>
+                        <span class='movie-title js-movie-title'>Lorem Ipsum</span><br/>
+                        <span class='release-date'>Released: 2019</span>
+                        <p class='description'>Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum.</p>
+                    </li>
+                </ul>
+            </section>
+            <label for='more-button' class='hidden'>Show More</label>
+            <input type='button' id='more-button' value='Show More' class='show-more js-show-more'>
+        </section>
+    </main>
+
+
+    <!--Search form to render!
+    <main class='hero js-hero'>
+        <section class='content search-page'>
             <h1 class='search-header'>Movie Hub</h1>
             <form class='search-form js-search-form'>
                 <label class='hidden' for='movie-input'>Movie title here:</label>
                 <input id='movie-input' type='text' placeholder='Search for your movie!'>
                 <input type='submit' class='hidden' value='submit'>
             </form>
-        </div>
+        </section>
     </main>
+    -->
 </body>
 </html>

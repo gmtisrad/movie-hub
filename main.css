@@ -2,10 +2,11 @@ html {
     min-width: 100vw;
     min-height: 100vh;
     box-sizing: border-box !important;
+    font-size: 22px;
 }
 
 .nav-bar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
@@ -16,6 +17,7 @@ html {
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    z-index: 100;
 }
 
 .nav-left {
@@ -50,7 +52,51 @@ html {
     margin: 0 auto;
     display: flex;
     align-content: center;
-    justify-content: center;
     flex-direction: column;
+}
+
+.search-page {
     text-align: center;
+    justify-content: center;
+}
+
+.results-list {
+    padding: 0;
+}
+
+.result-item {
+    list-style: none;
+}
+
+.movie-poster {
+    float: left;
+}
+
+.movie-title {
+    float: left;
+    text-align: left;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.release-date {
+    float: left;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 10px;
+}
+
+.description {
+    clear: both;
+}
+
+.results-header {
+    margin: 10px auto;
+}
+
+#more-button {
+    padding: 25px 0px;
+    margin: 0 auto;
+    width: 120px;
 }
