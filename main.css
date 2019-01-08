@@ -11,7 +11,7 @@ body {
 }
 
 *, *:after, *:before {
-    box-sizing: border-box;
+    box-sizing: inherit;
 }
 
 .nav-bar {
@@ -115,7 +115,7 @@ body {
 
 .main-description {
     font-size: 18px;
-    line-height: 1;
+    line-height: 1.5;
     margin: 0;
 }
 
@@ -223,6 +223,9 @@ body {
 }
 
 .actors-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -233,6 +236,7 @@ body {
 .actor {
     border: 1px solid black;
     margin: 10px;
+    width: 95%;
 }
 
 .actor-profile {
@@ -276,4 +280,76 @@ body {
     overflow: auto;
     min-height: 380px;
     max-height: 380px;
+}
+
+.clips {
+    border: 1px solid black;
+    min-height: 400px;
+    max-height: 400px;
+    margin: 10px 0;
+}
+
+.clips-section {
+    max-height: 379px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.clips-heading {
+    text-align: center;
+    border-bottom: 1px solid black;
+    height: 20px;
+    margin: 0;
+}
+
+.clip-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    min-height: 379px;
+    max-height: 379px;
+}
+
+.clip-list-item {
+    border: 1px solid black;
+    margin: 10px;
+    width: 95%;
+    height: 102px;
+}
+
+.clip-list-item p {
+    margin: 0;
+}
+
+.clip-thumbnail, .clip-thumbnail img {
+    height: 100px;
+    width: 100xp;
+    float: left;
+}
+
+.clip-thumbnail {
+    margin-right: 10px;
+}
+
+.clip-information {
+    height: 100px;
+    overflow-y: scroll;
+}
+
+.clip-name {
+    font-weight: 600;
+}
+
+.clip-channel {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 4px !important;
+    border-bottom: 1px solid black;
+}
+
+.clip-description {
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 200;
 }
