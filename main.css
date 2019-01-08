@@ -117,7 +117,6 @@ html {
 .main-movie-poster {
     width: 50%;
     height: auto;
-    display: inline-block;
     float: left;
     padding-right: 10px;
 }
@@ -135,15 +134,16 @@ html {
 }
 
 .movie-reviews {
-    height: 240px;
+    max-height: 400px;
+    min-height: 400px;
     min-width: 320px;
     max-width: 320px;
-    min-height: 240px;
     display: flex;
     flex-direction: row;
+    box-sizing: border-box;
 }
 .scores {
-    height: 100%;
+    max-height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -155,17 +155,21 @@ html {
 
 .review-heading {
     text-align: center;
-    height: 20px;
+    max-height: 20px;
+    min-height: 20px;
     margin: 0;
     border-bottom: 1px solid black;
+    box-sizing: border-box;
 }
 
 .reviews {
     height: 100%;
     max-width: 220px;
     min-width: 220px;
-    max-height: 240px;
+    max-height: 400px;
+    min-height: 400px;
     border: 1px solid black;
+    box-sizing: border-box;
 }
 
 .review {
@@ -182,10 +186,15 @@ html {
 
 .reviews-list {
     list-style: none;
-    max-height: 220px;
-    overflow: scroll;
+    max-height: 379px;
+    overflow: auto;
     padding: 0;
     margin: 0;
+}
+
+.review-section {
+    max-height: 379px;
+    min-height: 379px;
 }
 
 .actors {
@@ -197,15 +206,17 @@ html {
 }
 
 .actors-heading {
-    margin: 10px 0;
-    padding: 0;
     text-align: center;
+    height: 20px;
+    margin: 0;
+    border-bottom: 1px solid black;
 }
 
 .actors-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    overflow-y: auto;
 }
 
 .actor {
@@ -221,7 +232,6 @@ html {
 .actor-image {
     height: 100px;
     width: 100px;
-    display: inline-block;
     float: left;
     margin-right: 10px;
 }
@@ -253,4 +263,6 @@ html {
 
 .cast-list {
     overflow: auto;
+    min-height: 380px;
+    max-height: 380px;
 }
