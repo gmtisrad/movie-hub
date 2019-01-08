@@ -138,7 +138,7 @@ html {
     height: 240px;
     min-width: 320px;
     max-width: 320px;
-    max-height: 240px;
+    min-height: 240px;
     display: flex;
     flex-direction: row;
 }
@@ -186,4 +186,71 @@ html {
     overflow: scroll;
     padding: 0;
     margin: 0;
+}
+
+.actors {
+    min-width: 320px;
+    min-height: 400px;
+    max-height: 400px;
+    margin: 10px 0;
+    border: 1px solid black;
+}
+
+.actors-heading {
+    margin: 10px 0;
+    padding: 0;
+    text-align: center;
+}
+
+.actors-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.actor {
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.actor-profile {
+    min-height: 100px;
+    max-height: 100px;
+}
+
+.actor-image {
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+}
+
+.actor-image img{
+    height: 100px;
+    width: auto;
+}
+
+.actor-data {
+    padding: 0;
+    margin: 0;
+}
+
+.charactor-name {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.actor-name {
+    font-size: 20px; 
+    font-weight: 400;
+}
+
+.actor-page {
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.cast-list {
+    overflow: auto;
 }
