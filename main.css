@@ -149,6 +149,7 @@ body {
     min-height: 400px;
     min-width: 310px;
     max-width: 310px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
@@ -334,7 +335,7 @@ body {
 
 .clip-information {
     height: 100px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .clip-name {
@@ -354,7 +355,7 @@ body {
     font-weight: 200;
 }
 
-@media screen and (min-width: 640px) {
+@media screen and (min-width: 660px) {
     .content {
         width: 640px;
         flex-direction: row;
