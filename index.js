@@ -3,8 +3,8 @@
 function renderLandingPage () {
     let landingPage = createNav() + createSearch();
 
-    $('body').empty();
-    $('body').html(landingPage);
+    $('.js-hero').empty();
+    $('.js-hero').html(landingPage);
     handleSearch();
     handleNavClick();
 }
@@ -38,7 +38,6 @@ function handleNavClick () {
 
 function createSearch() {
     let searchHtml = `
-        <main class='hero js-hero'>
             <section class='content search-page'>
                 <h1 class='search-header'>Movie Hub</h1>
                 <form class='search-form js-search-form'>
@@ -46,8 +45,7 @@ function createSearch() {
                     <input id='movie-input' type='text' placeholder='Search for your movie!'>
                     <input type='submit' class='hidden' value='submit'>
                 </form>
-            </section>
-        </main>`;
+            </section>`;
     
     return searchHtml;
 }
@@ -71,8 +69,8 @@ function handleMovieClick () {
 
 function renderMoviePage (responseJson) {
     let imgEndpoint = 'http://image.tmdb.org/t/p/w342/';
-    let moviePageHtml = `<main class='hero js-hero'>
-    <section class='content movie-page'>
+    let moviePageHtml = `
+    <section class='content'>
         <section class='movie-information'>
             <div  class='main-movie-poster'><img src='${imgEndpoint+responseJson.poster_path}' alt='movie poster'></div>
             <p class='main-movie-title'>${responseJson.title}</p>
@@ -97,11 +95,10 @@ function renderMoviePage (responseJson) {
             <section class='clips-section'>
             </section>
         </section>
-    </section>
-</main>`;
+    </section>`;
 
-    $('body').empty();
-    $('body').html(createNav() + moviePageHtml);
+    $('.js-hero').empty();
+    $('.js-hero').html(createNav() + moviePageHtml);
     getYoutubeClips (responseJson.title);
     getMovieReviews (responseJson.title);
 }
@@ -196,17 +193,15 @@ function getMovieData(movieId) {
 
 function renderResultsPage(searchQuery, responseJson) {
     let resultsHtml = `
-    <main class='hero js-hero'>
     <section class='content results-page'>
         <section class='results js-results'>
         <h1 class='results-header'>Results for '${searchQuery}'</h1>
             ${createResultsList(responseJson)}
         </section>
-    </section>
-    </main>`
+    </section>`
     let resultsPage = createNav + resultsHtml;
-    $('body').empty();
-    $('body').html(resultsPage);
+    $('.js-hero').empty();
+    $('.js-hero').html(resultsPage);
     handleMovieClick();
 }
 
@@ -247,4 +242,6 @@ function getNumResults(numResults) {
     }
 }
 
-$(renderLandingPage());
+//$(renderLandingPage());
+
+$(getMovieData(550));
