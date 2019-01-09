@@ -161,6 +161,7 @@ body {
 
 .movie-information {
     box-sizing: border-box;
+    overflow-y: auto;
 }
 
 .main-movie-poster {

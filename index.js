@@ -158,7 +158,12 @@ function renderMovieReviews (responseJson) {
 
     movieReviews.unshift('<ul class=\'reviews-list\'>');
     movieReviews.push('</ul');
-    $('.review-section').html(movieReviews.join(' '));
+    if(responseJson.num_results != 0){
+      $('.review-section').html(movieReviews.join(' '));
+    }
+    else {
+      $('.review-section').html(`<h2>No reviews available for this title.</h2>`);
+    }
 }
 
 function createCastList (responseJson) {
