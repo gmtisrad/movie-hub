@@ -199,7 +199,7 @@ function renderResultsPage(searchQuery, responseJson) {
             ${createResultsList(responseJson)}
         </section>
     </section>`
-    let resultsPage = createNav + resultsHtml;
+    let resultsPage = createNav() + resultsHtml;
     $('.js-hero').empty();
     $('.js-hero').html(resultsPage);
     handleMovieClick();
