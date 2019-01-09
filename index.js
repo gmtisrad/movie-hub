@@ -242,6 +242,4 @@ function getNumResults(numResults) {
     }
 }
 
-//$(renderLandingPage());
-
-$(getMovieData(550));
+$(renderLandingPage());
