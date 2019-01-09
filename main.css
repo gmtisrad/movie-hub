@@ -31,6 +31,11 @@ body {
     z-index: 100;
 }
 
+.nav-bar a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 .nav-left {
     position: absolute;
     left: 0;
@@ -64,16 +69,49 @@ body {
 }
 
 .search-page {
-    text-align: center;
-    justify-content: center;
+    display: flex;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+}
+
+.search-header {
+    font-size: 52px;
+    width: 310px;
+    margin: 0 0 32px;
+}
+
+#movie-input {
+    padding: 10px;
+    font-size: 28px;
+    width: 310px;
+    border-radius: 150px;
 }
 
 .results-list {
     padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.results {
+    max-height: 100%;
+}
+
+.movie-poster {
+    float: left;
 }
 
 .result-item {
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px 0;
 }
 
 .movie-poster {
@@ -84,7 +122,8 @@ body {
     float: left;
     text-align: left;
     font-weight: 600;
-    padding: 10px;
+    padding: 0;
+    margin: 0;
 }
 
 .release-date {
@@ -92,7 +131,6 @@ body {
     text-align: left;
     font-size: 18px;
     font-weight: 300;
-    padding: 10px;
 }
 
 .description {
@@ -140,7 +178,7 @@ body {
 
 #more-button {
     padding: 25px 0px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
     width: 120px;
 }
 
@@ -176,8 +214,8 @@ body {
 
 .reviews {
     height: 100%;
-    max-width: 210px;
-    min-width: 210px;
+    max-width: 310px;
+    min-width: 310px;
     max-height: 400px;
     min-height: 400px;
     border: 1px solid black;
@@ -211,6 +249,7 @@ body {
 
 .actors {
     min-width: 310px;
+    max-width: 310px;
     min-height: 400px;
     max-height: 400px;
     border: 1px solid black;
@@ -241,19 +280,19 @@ body {
 }
 
 .actor-profile {
-    min-height: 100px;
-    max-height: 100px;
+    min-height: 150px;
+    max-height: 150px;
 }
 
 .actor-image {
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: auto;
     float: left;
     margin-right: 10px;
 }
 
 .actor-image img{
-    height: 100px;
+    height: 100%;
     width: auto;
 }
 
@@ -262,7 +301,14 @@ body {
     margin: 0;
 }
 
-.charactor-name {
+.actor-info {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.character-name {
     font-size: 22px;
     font-weight: 600;
 }
@@ -287,6 +333,8 @@ body {
     border: 1px solid black;
     min-height: 400px;
     max-height: 400px;
+    min-width: 310px;
+    max-width: 310px;
     margin: 10px 0;
 }
 
@@ -340,17 +388,18 @@ body {
 
 .clip-name {
     font-weight: 600;
+    font-size: 18px;
 }
 
 .clip-channel {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     margin-bottom: 4px !important;
     border-bottom: 1px solid black;
 }
 
 .clip-description {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1;
     font-weight: 200;
 }
@@ -384,5 +433,7 @@ body {
 
     .clips {
         margin: 10px 0;
+        min-width: 640px;
+        max-width: 640px;
     }
 }
