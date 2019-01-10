@@ -174,12 +174,12 @@ body {
 .movie-information {
     box-sizing: border-box;
     overflow-y: auto;
-    min-height: 400px;
-    max-height: 400px;
+    min-height: 600px;
+    margin: 10px 0;
 }
 
 .main-movie-poster {
-    width: 50%;
+    max-width: 100%;
     height: auto;
     float: left;
     padding-right: 10px;
@@ -212,16 +212,6 @@ body {
     border-radius: 10px;
     border: 1px solid black;
 }
-.scores {
-    max-height: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 100px;
-    min-width: 100px;
-    border: 1px solid black;
-    border-right: none;
-}
 
 .review-heading {
     text-align: center;
@@ -241,18 +231,6 @@ body {
     max-height: 400px;
     min-height: 400px;
     box-sizing: border-box;
-}
-
-.review {
-    box-sizing: border-box;
-    font-size: 18px;
-    font-weight: 300;
-    padding: 0 10px;
-    border-top: 1px solid black;
-}
-
-.review p {
-    margin: 10px;
 }
 
 .reviews-list {
@@ -276,6 +254,8 @@ body {
     max-width: 310px;
     min-height: 400px;
     max-height: 400px;
+    display: flex; 
+    flex-direction: column;
     border-radius: 10px;
     border: 1px solid black;
 }
@@ -297,7 +277,7 @@ body {
     padding: 0;
     margin: 0;
     overflow-y: auto;
-    max-height: 369px;
+    max-height: 100%;
     z-index: 0
 }
 
@@ -353,7 +333,6 @@ body {
 
 .cast-list {
     overflow: auto;
-    min-height: 90%;
     max-height: 90%;
 }
 
@@ -457,8 +436,7 @@ body {
 
     .movie-information {
         max-width: 55%;
-        max-height: 45%;
-        min-height: 45%;
+        max-height: 50%;
         margin: 30px 0 0 0;
     }
 
@@ -484,8 +462,7 @@ body {
 
     .movie-reviews {
         min-width: 45%;
-        max-height: 45%;
-        min-height: 45%;
+        max-height: 50%;
         margin: 30px 0 0 auto;
     }
 
@@ -535,7 +512,7 @@ body {
 
 @media screen and (min-width: 1280px) {
     .content {
-        width: 60vw;
+        width: 90vw;
     }
     .result-item {
         width: 30%;
@@ -562,13 +539,12 @@ body {
 
     .actor {
         max-width: 30%;
+        min-width: 30%;
     }
 
     .movie-reviews {
         min-width: 45%;
-        height: auto;
-        max-height: 45%;
-        min-height: 45%;
+        max-height: 80%;
         margin: 30px 0 0 auto;
     }
 
