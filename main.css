@@ -95,12 +95,13 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: flex-start;
 }
 
 .results {
-    display: inline;
+    display: inline-block;
+    width: 100%;
 }
 
 .movie-poster {
@@ -119,6 +120,7 @@ body {
 }
 
 .return-button {
+    display: block;
     padding:10px;
     margin: 10px auto;
 }
@@ -274,6 +276,7 @@ body {
     max-width: 310px;
     min-height: 400px;
     max-height: 400px;
+    border-radius: 10px;
     border: 1px solid black;
 }
 
@@ -465,7 +468,7 @@ body {
         min-width: 100%;
         height: auto;
         max-height: 50%;
-        margin: 30px 0 30px 0;
+        margin: 30px 0 0 0;
     }
 
     .actor {
@@ -507,9 +510,10 @@ body {
     }
 
     .clips {
-        margin: 10px 0;
+        margin: 30px 0;
         min-width: 100%;
         max-width: 100%;
+        border-radius: 10px;
     }
     
     .clips-section {
@@ -565,7 +569,7 @@ body {
         height: auto;
         max-height: 45%;
         min-height: 45%;
-        margin: 10px 0 0 auto;
+        margin: 30px 0 0 auto;
     }
 
     .reviews-list {

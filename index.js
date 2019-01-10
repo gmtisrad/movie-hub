@@ -121,11 +121,9 @@ function renderYoutubeClips (responseJson) {
     for (let i = 0; i < responseJson.pageInfo.resultsPerPage; i++) {
         let youtubeClipHtml = `<li class='clip-list-item'>
         <div class='clip'>
-            <div class='clip-thumbnail'><a href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><img src='${responseJson.items[i].snippet.thumbnails.high.url}' alt='youtube thumbnail'></a></div>
+            <div class='clip-thumbnail'><a target='_blank' href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><img src='${responseJson.items[i].snippet.thumbnails.high.url}' alt='youtube thumbnail'></a></div>
             <div class='clip-information'>
                 <p class='clip-name'>${responseJson.items[i].snippet.title}</p>
-                <p class='clip-channel'>${responseJson.items[i].snippet.channelTitle}</p>
-                <p class='clip-description'>${responseJson.items[i].snippet.description}</p>
             </div>
         </div>
     </li>`;
