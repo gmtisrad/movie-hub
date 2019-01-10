@@ -93,7 +93,8 @@ body {
 .results-list {
     padding: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
 }
@@ -114,8 +115,7 @@ body {
     justify-content: flex-start;
     border: 1px solid black;
     padding: 10px;
-    margin: 10px 0;
-    width: 100%;
+    margin: 10px .175%;
 }
 
 .return-button {
@@ -125,6 +125,8 @@ body {
 
 .movie-poster {
     float: left;
+    width: 100%;
+    height: auto;
 }
 
 .movie-title {
@@ -415,7 +417,7 @@ body {
 
 @media screen and (min-width: 660px) {
     .content {
-        width: 640px;
+        width: 60vw;
         height: 100%;
         flex-direction: row;
         flex-wrap: wrap;
@@ -440,9 +442,13 @@ body {
         margin-left: 10px;
     }
 
+    .result-item {
+        width: 45%;
+    }
+
     .clips {
         margin: 10px 0;
-        min-width: 640px;
-        max-width: 640px;
+        min-width: 100%;
+        max-width: 100%;
     }
 }

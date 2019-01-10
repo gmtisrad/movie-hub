@@ -68,7 +68,7 @@ function handleMovieClick () {
 }
 
 function renderMoviePage (responseJson) {
-    let imgEndpoint = 'http://image.tmdb.org/t/p/w342/';
+    let imgEndpoint = 'http://image.tmdb.org/t/p/original/';
     let moviePageHtml = `
     <section class='content'>
         <section class='movie-information'>
@@ -168,7 +168,7 @@ function renderMovieReviews (responseJson) {
 
 function createCastList (responseJson) {
     let castList = [];
-    let imgEndpoint = 'http://image.tmdb.org/t/p/w500/';
+    let imgEndpoint = 'http://image.tmdb.org/t/p/orginal/';
 
     for (let i = 0; i < responseJson.credits.cast.length; i++) {
         let castMember = `<li class='actor'>
@@ -228,7 +228,7 @@ function getResultsList(searchQuery) {
 }
 
 function createResultsList(responseJson) {
-    let imgEndpoint = 'http://image.tmdb.org/t/p/w185/';
+    let imgEndpoint = 'http://image.tmdb.org/t/p/original/';
     let resultsListHtml = [];
 
     for (let i = 0; i < getNumResults(responseJson.total_results); i++) {
