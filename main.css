@@ -172,6 +172,8 @@ body {
 .movie-information {
     box-sizing: border-box;
     overflow-y: auto;
+    min-height: 400px;
+    max-height: 400px;
 }
 
 .main-movie-poster {
@@ -216,8 +218,8 @@ body {
 
 .review-heading {
     text-align: center;
-    max-height: 20px;
-    min-height: 20px;
+    max-height: 5%;
+    min-height: 5%;
     margin: 0;
     border-bottom: 1px solid black;
     box-sizing: border-box;
@@ -268,7 +270,8 @@ body {
 
 .actors-heading {
     text-align: center;
-    height: 20px;
+    padding: 10px 0;
+    width: 100%;
     margin: 0;
     border-bottom: 1px solid black;
 }
@@ -347,6 +350,8 @@ body {
     min-width: 310px;
     max-width: 310px;
     margin: 10px 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .clips-section {
@@ -359,8 +364,9 @@ body {
 .clips-heading {
     text-align: center;
     border-bottom: 1px solid black;
-    height: 20px;
+    padding: 10px 0;
     margin: 0;
+    width: 100%;
 }
 
 .clip-list {
@@ -417,29 +423,80 @@ body {
 
 @media screen and (min-width: 660px) {
     .content {
-        width: 60vw;
+        width: 90vw;
         height: 100%;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: flex-start;
         align-items: flex-start;
     }
-    
-    .movie-information {
-        margin: 10px 0;
+
+    .main-movie-poster {
+        height: auto;
+        width: 75%;
+    }
+    .main-movie-poster img {
+        height: auto;
+        width: 100%;
     }
 
-    .main-movie-poster, .main-movie-poster img {
-        height: 100%;
-        width: auto;
+    .movie-information {
+        max-width: 45%;
+        max-height: 45%;
+        min-height: 45%;
+    }
+
+    .actors {
+        display: flex;
+        flex-direction: column;
+        min-width: 100%;
+        height: auto;
+        max-height: 50%;
+        margin: 0;
+    }
+
+    .actor {
+        min-width: 45%;
+        max-width: 45%;
+    }
+
+    .actors-list {
+        display: flex; 
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 
     .movie-reviews {
-        margin-right: 10px;
+        min-width: 45%;
+        height: auto;
+        max-height: 45%;
+        min-height: 45%;
+        margin: 10px 0 0 auto;
     }
-    
-    .actors {
-        margin-left: 10px;
+
+    .reviews {
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        max-height: 100%;
+        height: auto;
+    }
+
+    .reviews-list {
+        min-height: 100%;
+        border-bottom: 1px solid black;
+    }
+
+    .review-section {
+        min-height: 95%;
+        max-height: 95%;
+    }
+
+    .review {
+        margin: 20px;
+        border: 1px solid black;
+        border-radius: 10px;
+        font-size: 26px;
     }
 
     .result-item {
@@ -450,5 +507,72 @@ body {
         margin: 10px 0;
         min-width: 100%;
         max-width: 100%;
+    }
+    
+    .clips-section {
+        max-height: 95%;
+        min-height: 95%;
+    }
+
+    .clip-list {
+        min-width: 100%;
+        max-height: 100%;
+        display: flex; 
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: flex-start;
+        align-items: space-evenly;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .content {
+        width: 60vw;
+    }
+    .result-item {
+        width: 30%;
+    }
+
+    .actors-list {
+        display: flex; 
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: flex-start;
+        align-items: space-evenly;
+    }
+
+    .movie-reviews {
+        min-width: 45%;
+        height: auto;
+        max-height: 45%;
+        min-height: 45%;
+        margin: 10px 0 0 auto;
+    }
+
+    .reviews {
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        max-height: 100%;
+        height: auto;
+    }
+
+    .reviews-list {
+        min-height: 95%;
+        border-bottom: 1px solid black;
+    }
+
+    .review {
+        margin: 20px;
+        border: 1px solid black;
+        border-radius: 10px;
+        font-size: 26px;
+    }
+
+    .clip-list-item {
+        max-width: 45%;
+        min-width: 45%;
     }
 }

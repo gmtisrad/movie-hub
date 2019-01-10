@@ -20,10 +20,14 @@ function createNav () {
     return navHtml;
 }
 
+//TODO: Fix this garbage
 function handleNavClick () {
     $('.nav-bar').on('click', 'a', function(event) {
         event.preventDefault();
         let option = $(this).text();
+
+        alert (option);
+        /*
         if ('Movie Hub' == option) {
             renderLandingPage();
         }
@@ -32,7 +36,7 @@ function handleNavClick () {
         }
         else if ('Contact' == option) {
             alert('Send me an email! (I\'ll fix this later)');
-        }
+        }*/
     })
 }
 
@@ -106,7 +110,7 @@ function renderMoviePage (responseJson) {
 function getYoutubeClips (movieTitle) {
     let apiKey = 'AIzaSyCz-K5-RrdLGfMlf-0Q4yhY-Bzk1CLPMfM';
     let queryString = `${movieTitle} movie clips`;
-    let youtubeEndpoint = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&q=${encodeURIComponent(queryString)}&safeSearch=none`;
+    let youtubeEndpoint = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&maxResults=10&part=snippet&q=${encodeURIComponent(queryString)}&safeSearch=none`;
 
     fetch(youtubeEndpoint)
     .then(response => response.json())
@@ -168,7 +172,7 @@ function renderMovieReviews (responseJson) {
 
 function createCastList (responseJson) {
     let castList = [];
-    let imgEndpoint = 'http://image.tmdb.org/t/p/orginal/';
+    let imgEndpoint = 'http://image.tmdb.org/t/p/w500/';
 
     for (let i = 0; i < responseJson.credits.cast.length; i++) {
         let castMember = `<li class='actor'>
