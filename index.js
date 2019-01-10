@@ -202,12 +202,21 @@ function renderResultsPage(searchQuery, responseJson) {
         <section class='results js-results'>
         <h1 class='results-header'>Results for '${searchQuery}'</h1>
             ${createResultsList(responseJson)}
+            <button class='return-button js-return-button'>Return to search</button>
         </section>
     </section>`
     let resultsPage = createNav() + resultsHtml;
     $('.js-hero').empty();
     $('.js-hero').html(resultsPage);
     handleMovieClick();
+    handleReturnClick();
+}
+
+function handleReturnClick () {
+  $('.js-return-button').on('click', event =>{
+    event.preventDefault();
+    renderLandingPage();
+  })
 }
 
 function getResultsList(searchQuery) {
