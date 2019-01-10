@@ -82,11 +82,9 @@ function renderMoviePage (responseJson) {
             <p class='main-description'>${responseJson.overview}</p>
         </section>
         <section class='movie-reviews'>
-            <section class='reviews'>
-                <h5 class='review-heading'>NY Times Reviews</h5>
-                <section class='review-section'>
-                </section>
-            </section>
+            <div class='review-heading'><h5>NY Times Reviews</h5></div>
+            <section class='review-section'>
+          </section>
         </section>
         <section class='actors'>
             <h5 class='actors-heading'>Actors</h5>
