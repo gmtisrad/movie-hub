@@ -1,12 +1,12 @@
 html {
-    min-width: 100%;
-    min-height: 100%;
     box-sizing: border-box !important;
     font-size: 22px;
+    height: 100%;
+    width: 100%;
 }
 
 body {
-    height: 100vh;
+    height: 100%;
     width: 100%;
     margin: 0;
     padding-top: 60px;
@@ -60,13 +60,9 @@ body {
 }
 
 .content {
-    width: 310px;
+    max-width: 310px;
     height: 100%;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
 }
 
 .search-page {
@@ -92,16 +88,19 @@ body {
 
 .results-list {
     padding: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
 }
 
 .results {
     display: inline-block;
-    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+}
+
+.results-list {
+    column-count: 1;
+    column-width: 310px;
+    column-fill: balance;
 }
 
 .movie-poster {
@@ -115,8 +114,10 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
     border: 1px solid black;
+    width: 100%;
     padding: 10px;
-    margin: 10px .175%;
+    margin-bottom: 30px;
+    break-inside: avoid;
 }
 
 .return-button {
@@ -425,6 +426,16 @@ body {
         align-items: flex-start;
     }
 
+    .results-page {
+
+    }
+
+    .movie-page {
+        display: initial;
+        column-count: 2;
+        column-gap: 30px;
+    }
+
     .main-movie-poster {
         height: auto;
         width: 75%;
@@ -438,6 +449,7 @@ body {
         max-width: 55%;
         max-height: 50%;
         margin: 30px 0 0 0;
+        column-span: 1;
     }
 
     .actors {
@@ -447,6 +459,7 @@ body {
         height: auto;
         max-height: 50%;
         margin: 30px 0 0 0;
+        column-span: 1;
     }
 
     .actor {
@@ -464,6 +477,7 @@ body {
         min-width: 45%;
         max-height: 50%;
         margin: 30px 0 0 auto;
+        column-span: 1;
     }
 
     .reviews-list {
@@ -482,8 +496,14 @@ body {
         font-size: 26px;
     }
 
-    .result-item {
-        width: 45%;
+    .results-list {
+        column-count: 2;
+        column-width: 310px;
+        column-fill: balance;
+    }
+
+    .results {
+        width: 100%;
     }
 
     .clips {
@@ -512,11 +532,14 @@ body {
 
 @media screen and (min-width: 1280px) {
     .content {
-        width: 90vw;
+        max-width: 1200px !important;
     }
-    .result-item {
-        width: 30%;
-    }
+
+    .results-list {
+        column-count: 3;
+        column-width: 310px;
+        column-fill: balance;
+    }    
 
     .main-movie-poster {
         height: auto;
@@ -563,4 +586,12 @@ body {
         max-width: 45%;
         min-width: 45%;
     }
+}
+
+@media screen and (min-width: 1600px) {
+    .results-list {
+        column-count: 5;
+        column-width: 310px;
+        column-fill: balance;
+    }    
 }

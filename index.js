@@ -74,7 +74,7 @@ function handleMovieClick () {
 function renderMoviePage (responseJson) {
     let imgEndpoint = 'http://image.tmdb.org/t/p/original/';
     let moviePageHtml = `
-    <section class='content'>
+    <section class='content movie-page'>
         <section class='movie-information'>
             <div  class='main-movie-poster'><img src='${imgEndpoint+responseJson.poster_path}' alt='movie poster'></div>
             <p class='main-movie-title'>${responseJson.title}</p>
