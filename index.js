@@ -1,28 +1,39 @@
 'use strict'
 
 function renderLandingPage () {
-    let landingPage = createNav() + createSearch();
+    let landingPage = createNav() + createSearch() + '</div>'; //Added an extra end div tag for my background image wrapper. gotta be a better way!
 
-    $('.js-hero').empty();
-    $('.js-hero').html(landingPage);
+    $('.content').empty();
+    $('.content').html(landingPage);
     handleSearch();
     handleNavClick();
 }
 
 function createNav () {
     let navHtml = `
-    <nav class='nav-bar'>
-        <a href='' class='nav-item nav-title nav-left js-nav-title'>Movie Hub</a>
-        <a href='' class='nav-item nav-right js-nav-search'>Search</a>
-        <a href='' class='nav-item nav-right js-nav-contact'>Contact</a>
-    </nav>`;
-
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark js-header-nav">
+            <a class="navbar-brand" href="#">Movie Hub</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class='background-image'>`;//This opening div tag is for my background image wrapper;
     return navHtml;
 }
 
 //TODO: Fix this garbage
 function handleNavClick () {
-    $('.nav-bar').on('click', 'a', function(event) {
+    $('.js-header-nav').on('click', 'a', function(event) {
         event.preventDefault();
         let option = $(this).text();
 
@@ -42,14 +53,24 @@ function handleNavClick () {
 
 function createSearch() {
     let searchHtml = `
-            <section class='content search-page'>
-                <h1 class='search-header'>Movie Hub</h1>
-                <form class='search-form js-search-form'>
-                    <label class='hidden' for='movie-input'>Movie title here:</label>
-                    <input id='movie-input' type='text' placeholder='Search for your movie!'>
-                    <input type='submit' class='hidden' value='submit'>
-                </form>
-            </section>`;
+         <div class='container search-page'>
+            <section class='row search-row'>
+                <div class='col-sm-offset-1 col-sm-10'>
+                    <h1 class='text-center'>Movie Hub</h1>
+                    <div class='row'>
+                        <form class='search-form js-search-form col-sm-12 text-center'>
+                            <div class='input-group input-group-lg mt-3'>
+                                <label class='hidden' for='movie-input'>Movie title here:</label>
+                                <input id='movie-input' class='form-control' type='text' placeholder='Search for a movie!'>
+                                <div class='input-group-append'>
+                                    <button type='submit' class='btn btn-danger btn-group-secondary' value='submit'>Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>`;
     
     return searchHtml;
 }
@@ -86,7 +107,12 @@ function renderMoviePage (responseJson) {
                 <div class='review-heading'><h5>NY Times Reviews</h5></div>
                 <section class='review-section'>
              </section>
-            </section>
+            </section><nav class='nav-bar'>
+            <div
+            <a href='' class=''>Movie Hub</a>
+            <a href='' class=''>Search</a>
+            <a href='' class=''>Contact</a>
+        </nav>
             <section class='clips'>
                 <h5 class='clips-heading'>Top Clips</h5>
                 <section class='clips-section'>
@@ -200,18 +226,30 @@ function getMovieData(movieId) {
 
 function renderResultsPage(searchQuery, responseJson) {
     let resultsHtml = `
-    <section class='content results-page'>
-        <section class='results js-results'>
-        <h1 class='results-header'>Results for '${searchQuery}'</h1>
-            ${createResultsList(responseJson)}
-            <button class='return-button js-return-button'>Return to search</button>
-        </section>
+        <section class='container' id='results-page'>
+            <section id='results-row' class='results js-results row'>
+                <div class='text-left mt-3 mb-3 col-12'>
+                    <h2 class='results-header'>Results for '${searchQuery}'</h1>
+                    ${createResultsList(responseJson)}
+                    <button type='button' class='btn btn-info btn-block mb-3 return-button js-return-button'>Return to search</button>
+                </div>
+            </section>
     </section>`
     let resultsPage = createNav() + resultsHtml;
-    $('.js-hero').empty();
-    $('.js-hero').html(resultsPage);
+    $('.content').empty();
+    $('.content').html(resultsPage);
     handleMovieClick();
     handleReturnClick();
+    $('.carousel').carousel();
+    $('.carousel-control-prev').click(function() {
+        event.preventDefault();
+        $('.carousel').carousel('prev');
+    });
+      
+    $('.carousel-control-next').click(function() {
+        event.preventDefault();
+        $('.carousel').carousel('next');
+    });
 }
 
 function handleReturnClick () {
@@ -232,19 +270,31 @@ function getResultsList(searchQuery) {
 function createResultsList(responseJson) {
     let imgEndpoint = 'http://image.tmdb.org/t/p/original/';
     let resultsListHtml = [];
+    
 
     for (let i = 0; i < getNumResults(responseJson.total_results); i++) {
-        let resultItemHtml = `
-            <li data-id=${responseJson.results[i].id} class='result-item js-result-item'>
-                <img src='${imgEndpoint + responseJson.results[i].poster_path}' class='movie-poster js-movie-poster' alt='movie poster'>
-                <a class='movie-title js-movie-title' href=''>${responseJson.results[i].title}</a><br/>
-                <span class='release-date'>${responseJson.results[i].release_date}</span>
-                <p class='description'>${responseJson.results[i].overview}</p>
-            </li>`;
+        let activeCarousel = (i) => {if(i == 0) {return 'active';}};
+        let resultItemHtml = `<div data-id=${responseJson.results[i].id} class="carousel-item w-100 ${activeCarousel(i)}">
+                                <img class="d-block img_responsive movie-poster js-movie-poster" src="${imgEndpoint + responseJson.results[i].poster_path}" alt="movie poster">
+                                <div id='carousel-information' class="carousel-caption">
+                                    <h5>${responseJson.results[i].title}</h5>
+                                    <p>${responseJson.results[i].overview.substring(0, 275)+'...'}</p>
+                                </div>
+                            </div>`;
             resultsListHtml.push(resultItemHtml);
     }
-    resultsListHtml.unshift(`<ul class='results-list'>`);
-    resultsListHtml.push('</ul>')
+    resultsListHtml.unshift(`<div id='results-carousel' class="carousel slide">
+                                <div class="carousel-inner w-100">`);
+    resultsListHtml.push(`</div>
+                            <a id='left-control' class="carousel-control-prev" href="" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a id='right-control' class="carousel-control-next" href="" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>`);
     resultsListHtml = resultsListHtml.join(' ');
     return resultsListHtml;
 }
