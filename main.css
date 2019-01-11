@@ -175,15 +175,15 @@ body {
 .movie-information {
     box-sizing: border-box;
     overflow-y: auto;
-    min-height: 600px;
     margin: 10px 0;
+    break-inside: avoid;
 }
 
 .main-movie-poster {
     max-width: 100%;
     height: auto;
     float: left;
-    padding-right: 10px;
+    margin: 0 auto;
 }
 
 .main-movie-poster img {
@@ -199,11 +199,11 @@ body {
 }
 
 .movie-reviews {
-    max-height: 400px;
     min-height: 400px;
     min-width: 310px;
     max-width: 310px;
     margin-bottom: 10px;
+    break-inside: avoid;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -237,7 +237,7 @@ body {
 .reviews-list {
     list-style: none;
     height: inherit;
-    overflow: auto;
+    width: 100%;
     padding: 0;
     margin: 0;
 }
@@ -259,6 +259,7 @@ body {
     flex-direction: column;
     border-radius: 10px;
     border: 1px solid black;
+    break-inside: avoid;
 }
 
 .actors-heading {
@@ -340,17 +341,16 @@ body {
 .clips {
     border: 1px solid black;
     min-height: 400px;
-    max-height: 400px;
     min-width: 310px;
     max-width: 310px;
     margin: 10px 0;
     display: flex;
+    break-inside: avoid;
     flex-direction: column;
 }
 
 .clips-section {
     max-height: 90%;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
@@ -368,8 +368,7 @@ body {
     margin: 0;
     padding: 0;
     list-style: none;
-    min-height: 369px;
-    max-height: 369px;
+    height: 100%;
 }
 
 .clip-list-item {
@@ -416,24 +415,30 @@ body {
     font-weight: 200;
 }
 
-@media screen and (min-width: 660px) {
+.movie-page {
+    height: 100%;
+    width: 100%;
+    column-count: 1;
+    column-width: 300px;
+    column-gap: 30px;
+    column-fill: balance;
+    display: inline;
+    
+}
+
+@media screen and (min-width: 700px) {
     .content {
         width: 90vw;
         height: 100%;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-
-    .results-page {
-
+        max-width: initial;
     }
 
     .movie-page {
-        display: initial;
         column-count: 2;
+        column-width: 300px;
         column-gap: 30px;
+        column-fill: balance;
+        display: inline;
     }
 
     .main-movie-poster {
@@ -446,10 +451,7 @@ body {
     }
 
     .movie-information {
-        max-width: 55%;
-        max-height: 50%;
         margin: 30px 0 0 0;
-        column-span: 1;
     }
 
     .actors {
@@ -458,8 +460,6 @@ body {
         min-width: 100%;
         height: auto;
         max-height: 50%;
-        margin: 30px 0 0 0;
-        column-span: 1;
     }
 
     .actor {
@@ -474,14 +474,11 @@ body {
     }
 
     .movie-reviews {
-        min-width: 45%;
-        max-height: 50%;
+        min-width: initial;
+        max-width: initial;
         margin: 30px 0 0 auto;
-        column-span: 1;
-    }
-
-    .reviews-list {
-        min-height: 100%;
+        break-inside: avoid;
+        min-height: initial;
     }
 
     .review-section {
@@ -497,10 +494,10 @@ body {
     }
 
     .results-list {
-        column-count: 2;
+        column-count: 3;
         column-width: 310px;
         column-fill: balance;
-    }
+    }    
 
     .results {
         width: 100%;
@@ -508,19 +505,15 @@ body {
 
     .clips {
         margin: 30px 0;
-        min-width: 100%;
-        max-width: 100%;
         border-radius: 10px;
-    }
-    
-    .clips-section {
-        max-height: 95%;
-        min-height: 95%;
+        display: inline-block;
+        min-width: initial;
+        max-width: initial;
     }
 
     .clip-list {
         min-width: 100%;
-        max-height: 100%;
+        height: 100%;
         display: flex; 
         flex-direction: row;
         flex-wrap: wrap;
@@ -533,6 +526,10 @@ body {
 @media screen and (min-width: 1280px) {
     .content {
         max-width: 1200px !important;
+    }
+    .movie-page {
+        column-count: 2;
+        column-width: 600px;
     }
 
     .results-list {
@@ -566,13 +563,7 @@ body {
     }
 
     .movie-reviews {
-        min-width: 45%;
-        max-height: 80%;
         margin: 30px 0 0 auto;
-    }
-
-    .reviews-list {
-        min-height: 90%;
     }
 
     .review {

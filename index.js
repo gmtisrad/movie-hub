@@ -74,27 +74,29 @@ function handleMovieClick () {
 function renderMoviePage (responseJson) {
     let imgEndpoint = 'http://image.tmdb.org/t/p/original/';
     let moviePageHtml = `
-    <section class='content movie-page'>
-        <section class='movie-information'>
-            <div  class='main-movie-poster'><img src='${imgEndpoint+responseJson.poster_path}' alt='movie poster'></div>
-            <p class='main-movie-title'>${responseJson.title}</p>
-            <p class='main-release-date'>${responseJson.release_date}</p>
-            <p class='main-description'>${responseJson.overview}</p>
-        </section>
-        <section class='movie-reviews'>
-            <div class='review-heading'><h5>NY Times Reviews</h5></div>
-            <section class='review-section'>
-          </section>
-        </section>
-        <section class='actors'>
-            <h5 class='actors-heading'>Actors</h5>
-            <section class='cast-list'>
-                ${createCastList(responseJson)}
+    <section class='content'>
+        <section class='movie-page'>
+            <section class='movie-information'>
+                <div  class='main-movie-poster'><img src='${imgEndpoint+responseJson.poster_path}' alt='movie poster'></div>
+                <p class='main-movie-title'>${responseJson.title}</p>
+                <p class='main-release-date'>${responseJson.release_date}</p>
+                <p class='main-description'>${responseJson.overview}</p>
             </section>
-        </section>
-        <section class='clips'>
-            <h5 class='clips-heading'>Top Clips</h5>
-            <section class='clips-section'>
+            <section class='movie-reviews'>
+                <div class='review-heading'><h5>NY Times Reviews</h5></div>
+                <section class='review-section'>
+             </section>
+            </section>
+            <section class='clips'>
+                <h5 class='clips-heading'>Top Clips</h5>
+                <section class='clips-section'>
+                </section>
+            </section>
+            <section class='actors'>
+                <h5 class='actors-heading'>Actors</h5>
+                <section class='cast-list'>
+                    ${createCastList(responseJson)}
+                </section>
             </section>
         </section>
     </section>`;
