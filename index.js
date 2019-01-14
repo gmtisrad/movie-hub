@@ -73,7 +73,6 @@ function renderAboutPage () {
     let aboutHtml = `
     <div class='about-div'>
         <section id='about' class='container'>
-            <h1 class='text-center'>About</h1>
             <h3 class='text-center'>Hi, I'm Gabe!</h3>
             <p class='text-center'>I made this project as a part of my API capstone project in my full stack web development program.</p>
             <p class='text-center'>Every element in this project is rendered to the screen using Javascript and JQuery. The APIs used are the <a href='https://www.themoviedb.org/'>tMDB API</a>, the <a href='https://www.nytimes.com/reviews/movies'>New York Times Movie Reviews API</a> and the <a href='https://www.youtube.com/'>Youtube Data API</a>.
@@ -108,7 +107,7 @@ function createSearch() {
                         <form class='search-form js-search-form col-sm-12 text-center'>
                             <div class='input-group input-group-lg mt-3'>
                                 <label class='hidden' for='movie-input'>Movie title here:</label>
-                                <input id='movie-input' class='form-control' type='text' placeholder='Search for a movie!'>
+                                <input id='movie-input' class='form-control' type='text' placeholder='Movie Search!'>
                                 <div class='input-group-append'>
                                     <button type='submit' class='btn btn-danger btn-group-secondary' value='submit'>Submit</button>
                                 </div>

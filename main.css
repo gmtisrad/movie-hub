@@ -54,20 +54,17 @@ body {
     padding: 0 !important;
 }
 
-#results-carousel {
+#results-carousel,
+#results-carousel .carousel-inner,
+#results-carousel .carousel-inner .carousel-item {
     max-height: 70vh;
+    min-height: 70vh;
     min-width: auto;
 }
 
-#results-carousel .carousel-inner,
-#results-carousel .carousel-inner .carousel-item {
-        max-height: inherit;
-        min-width: inherit;
-}
-
 #results-carousel .carousel-inner .carousel-item .movie-poster {
-    min-height: 500px;
-    max-height: 80vh;
+    min-height: 70vh;
+    max-height: 70vh;
     width: auto;
     margin: 0 auto;
 }
@@ -169,6 +166,6 @@ body {
 
 @media screen and (min-width: 1921px) {
     html {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 }
