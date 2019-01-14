@@ -1,5 +1,11 @@
 'use strict'
 
+/**
+ * Function - renderLandingPage
+ * Description - Calls the createNav and createSearch functions and combines the results into
+ * the landing page's html. That html is then rendered into the 'content' element. The
+ * necessary event listeners are then called.
+ */
 function renderLandingPage () {
     let landingPage = createNav() + createSearch();
 
@@ -9,6 +15,11 @@ function renderLandingPage () {
     handleNavClick();
 }
 
+/**
+ * Function - createNav 
+ * Description - The navbar's html is created in this function.
+ * Return navHtml - The html string for the navbar.
+ */
 function createNav () {
     let navHtml = `
         <nav class="navbar navbar-expand-md navbar-dark bg-dark js-header-nav">
@@ -30,6 +41,10 @@ function createNav () {
     return navHtml;
 }
 
+/**
+ * Function - handleNavClick
+ * Description - This is a delegated event handler placed on the navbar to determine what happens when a certain element is clicked.
+ */
 //TODO: Fix this garbage
 function handleNavClick () {
     $('.js-header-nav').on('click', 'a', function(event) {
@@ -48,6 +63,11 @@ function handleNavClick () {
     })
 }
 
+/**
+ * Function - createSearch
+ * Description - The search portion of the landing page's html is created in this function.
+ * Return searchHtml - The html string for the search form.
+ */
 function createSearch() {
     let searchHtml = `
          <div class='container search-page'>
@@ -72,6 +92,11 @@ function createSearch() {
     return searchHtml;
 }
 
+/**
+ * Function - handleSearch
+ * Description - This is an Event Listener for the search input form on the landing page. The value of
+ * the input field is taken and used to query the tMDB API through the getResultsList function.
+ */
 function handleSearch () {
     $('.search-form').on('submit', function(event) {
         event.preventDefault();
@@ -81,6 +106,11 @@ function handleSearch () {
     });
 }
 
+/**
+ * Function handleMovieClick
+ * Description - This is an event listener for the movie title in the carousel. The function
+ * getMovieData is called using the movieID value retrieved fromt the tMDB search query.
+ */
 function handleMovieClick () {
     $('.js-movie-title').on('click', function(event) {
         event.preventDefault();
@@ -89,6 +119,13 @@ function handleMovieClick () {
     })
 }
 
+/**
+ * Function - renderMoviePage
+ * Param responseJson - The response JSON object retrieved from the tMDB API.
+ * Description - The movie page is rendered using the movie specific API call. This function
+ * uses the functions getYoutubeClips and getMovieReviews to populate the 'review-section' and 
+ * 'cast-list' elements. 
+ */
 function renderMoviePage (responseJson) {
     let imgEndpoint = 'http://image.tmdb.org/t/p/original/';
     let moviePageHtml = `
@@ -131,6 +168,12 @@ function renderMoviePage (responseJson) {
     getMovieReviews (responseJson.title);
 }
 
+/**
+ * Function - getYoutubeClips 
+ * Param movieTitle - The movie title used to query the Youtube Data API. Retrieved from the tMDB API.
+ * Description - The movie title is used to query the Youtube Data API. The response JSON object is then
+ * used to call the renderYoutubeClipss function.
+ */
 function getYoutubeClips (movieTitle) {
     let apiKey = 'AIzaSyCz-K5-RrdLGfMlf-0Q4yhY-Bzk1CLPMfM';
     let queryString = `${movieTitle} movie clips`;
@@ -141,9 +184,16 @@ function getYoutubeClips (movieTitle) {
     .then(responseJson => renderYoutubeClips(responseJson));
 }
 
+/**
+ * Function - renderYoutubeClips
+ * Param responseJson - The response JSON object retrieved from the youtube data API
+ * Description - The response JSON object is used to generate the html for the youtube clips section.
+ * The html is then rendered into the 'clips-section' element.
+ */
 function renderYoutubeClips (responseJson) {
     let youtubeClipsHtml = [];
 
+    //Clips are both created and rendered here. Could be seperated.
     for (let i = 0; i < responseJson.pageInfo.resultsPerPage; i++) {
         let youtubeClipHtml = `
         <div class='clip row border-bottom border-dark'>
@@ -158,6 +208,12 @@ function renderYoutubeClips (responseJson) {
     $('.clips-section').html(youtubeClipsHtml.join(' '));
 }
 
+/**
+ * Function - getMovieReviews
+ * Param movieTitle - The movie title retrieved by the tMDB API.
+ * Description - The NY Times movie review API is queried using the movie title retrieved by the tMDB API.
+ * The renderMovieReviews function is then called using the response JSON object. 
+ */
 function getMovieReviews (movieTitle) {
     let apiKey = '578e72e052004a08b514bb7f6963a8fc';
     let reviewEndpoint = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=${apiKey}&query=${movieTitle}`;
@@ -167,12 +223,19 @@ function getMovieReviews (movieTitle) {
     .then(responseJson => renderMovieReviews(responseJson));
 }
 
+
+/**
+ * Function - renderMovieReviews
+ * Param responseJson - The response JSON object containing the NY Times movie review data
+ * Description - The movie review data is converted into html and pushed into an array.
+ * The array is then joined and rendered into the 'review-section' element.
+ */
 function renderMovieReviews (responseJson) {
     let movieReviews = [];
-
+    //The movie review section's html is both created and rendered here. Could be seperated.
     for (let i = 0; i < responseJson.num_results; i++) {
         let movieReview = `<li class='review border-bottom border-dark'>
-        <h4>${responseJson.results[i].headline}</h4>
+        <h4><a href='${responseJson.results[i].link.url}'>${responseJson.results[i].headline}</a></h4>
         <h5>Author: ${responseJson.results[i].byline}</h5>
         <p>Summary: ${responseJson.results[i].summary_short}</p>
     </li>`;
@@ -189,6 +252,13 @@ function renderMovieReviews (responseJson) {
     }
 }
 
+/**
+ * Function - createCastList
+ * Param responseJson - The response JSON object containing the cast JSON data
+ * Description - Each cast member is used to create a bootstrap column in html, then pushed into an array.
+ * The array is then joined and returned.
+ * Returns castList - The cast list html string.
+ */
 function createCastList (responseJson) {
     let castList = [];
     let imgEndpoint = 'http://image.tmdb.org/t/p/w500/';
@@ -198,7 +268,7 @@ function createCastList (responseJson) {
         <div class='actor-profile col-6 col-md-4'>
             <div class='actor-image'><img class='img-fluid' src='${imgEndpoint + responseJson.credits.cast[i].profile_path}' alt='actor image'></div>
             <div class='actor-info'>
-                <p class='actor-data character-name'>${responseJson.credits.cast[i].character}</p>
+                <p class='actor-data border-bottom border-info'>${responseJson.credits.cast[i].character}</p>
                 <p class='actor-data actor-name'>${responseJson.credits.cast[i].name}</p>
             </div>
         </div>`;
@@ -209,6 +279,13 @@ function createCastList (responseJson) {
     return castList.join('');
 }
 
+
+/**
+ * Function - getMovieData 
+ * Param movieId - The ID of the movie retrieved by tMDB API.
+ * Description - The movieId parameter is used to query the tMDB api. The response JSON object is then used to
+ * render the movie page.
+ */
 function getMovieData(movieId) {
     let api_key = '7087ed750c60817c883cf6512c1c0f1c';
     let movieURL = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_to_response=credits`;
@@ -218,6 +295,14 @@ function getMovieData(movieId) {
     .then(responseJson => renderMoviePage(responseJson));
 }
 
+
+/**
+ * Function - renderResultsPage
+ * Param searchQuery - The query string taken by the search input field on the landing page
+ * Param responseJson - The JSON response object of the results returned by the tMDB API
+ * Description - This function uses the response JSON object to create the results page. It then 
+ * renders it to the content <div> using jquery.
+ */
 function renderResultsPage(searchQuery, responseJson) {
     let resultsHtml = `
         <section class='container' id='results-page'>
@@ -232,20 +317,26 @@ function renderResultsPage(searchQuery, responseJson) {
     let resultsPage = createNav() + resultsHtml;
     $('.content').empty();
     $('.content').html(resultsPage);
-    handleMovieClick();
-    handleReturnClick();
-    $('.carousel').carousel();
-    $('.carousel-control-prev').click(function() {
+    handleMovieClick();//Event listener called
+    handleReturnClick();//Event listener called
+    $('.carousel').carousel();//The results carousel is initialized
+    $('.carousel-control-prev').click(function() {//Gives functionality to the carousel navigation buttons
         event.preventDefault();
         $('.carousel').carousel('prev');
     });
       
-    $('.carousel-control-next').click(function() {
+    $('.carousel-control-next').click(function() {//Gives functionality to the carousel navigation buttons
         event.preventDefault();
         $('.carousel').carousel('next');
     });
 }
 
+/**
+ * Function - handleReturnClick
+ * Param - None
+ * Description - This function is an event listener for the return button on the bottom of my
+ * results page. It returns the user to the landing page.
+ */
 function handleReturnClick () {
   $('.js-return-button').on('click', event =>{
     event.preventDefault();
@@ -253,6 +344,12 @@ function handleReturnClick () {
   })
 }
 
+/**
+*Function - getResultsList
+*Param searchQuery - The query string taken by the search input. (Must be a movie title)
+*Description - This function queries the tMDB API and calls the renderResultsPage function 
+*with the query string and response data.
+*/
 function getResultsList(searchQuery) {
     let resultsListHtml = '';
     let api_key = '7087ed750c60817c883cf6512c1c0f1c'
@@ -261,6 +358,12 @@ function getResultsList(searchQuery) {
     .then(responseJson => renderResultsPage(searchQuery, responseJson));
 }
 
+/**
+*Function - createResultsList
+*Param responseJson - The Json object retrieved from the tMDB API with the fetch API
+*Descrtiption - This function takes the JSON object and creates the html needed to display the results
+*in a bootstrap carousel. That html is then returned.
+*/
 function createResultsList(responseJson) {
     let imgEndpoint = 'http://image.tmdb.org/t/p/original/';
     let resultsListHtml = [];
@@ -290,7 +393,13 @@ function createResultsList(responseJson) {
     resultsListHtml = resultsListHtml.join(' ');
     return resultsListHtml;
 }
-
+/**
+*Function - getNumResults
+*Param numResults - The number of results returned by the tMDB api
+*Description - I set a limit to the number of results to be displayed because the api
+*returns a lot of irrelevant data after a certain point. 
+*Note - I may remove this if people end up needing all of the data
+*/
 function getNumResults(numResults) {
     if (numResults > 20) {
         return 20;

@@ -118,6 +118,11 @@ body {
     margin: 0;
 }
 
+.actor-data {
+    margin: 0;
+    font-size: .75rem;
+}
+
 @media screen and (min-width: 768px){
     body {
         background-size: 100% 100vh;
