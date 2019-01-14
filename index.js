@@ -24,7 +24,7 @@ function renderLandingPage () {
 function createNav () {
     let navHtml = `
         <nav class="navbar navbar-expand-md navbar-dark bg-dark js-header-nav">
-            <span>Movie Hub</span>
+            <span class='navbar-brand'>Movie Hub</span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
             <span class="navbar-toggler-icon"></span>
             </button>
