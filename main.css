@@ -15,6 +15,11 @@ body {
     background-repeat: no-repeat;
 }
 
+.content {
+    min-height: 100vh;
+    background-color: #fffffff0;
+}
+
 .row {
     overflow-x: hidden;
 }
@@ -60,13 +65,25 @@ body {
     max-height: 70vh;
     min-height: 70vh;
     min-width: auto;
+    overflow: hidden;
+    background: white;
 }
 
 #results-carousel .carousel-inner .carousel-item .movie-poster {
-    min-height: 70vh;
-    max-height: 70vh;
-    width: auto;
+    min-height: 40vh;
+    max-height: 40vh;
     margin: 0 auto;
+    width: auto;
+}
+
+#carousel-information {
+    position: relative;
+    left: 15%;
+    min-height: 30vh;
+    max-height: 30vh;
+    max-width: 70%;
+    background-color: black;
+    margin: 20px 0 0 0;
 }
 
 .navbar-row {
@@ -74,18 +91,9 @@ body {
     width: 100%;
 }
 
-#carousel-information {
-    background-color: #0000007a;
-    border-radius: 10px;
-}
-
 #left-control,
 #right-control {
     background-color: #1d1d1dc2;
-}
-
-#movie-page {
-    background-color: #ffffffcf;
 }
 
 #movie-reviews {
@@ -123,7 +131,6 @@ body {
 #about {
     padding-top: 5vh;
     padding-bottom: 5vh;
-    background-color: #ffffffcf;
     font-weight: 800;
 }
 
@@ -135,7 +142,10 @@ body {
 }
 .social-icons a {
     font-size: 3rem;
-    color: #0000000;
+}
+
+.js-movie-title {
+    font-size: .8em;
 }
 
 @media screen and (min-width: 768px){
@@ -153,10 +163,16 @@ body {
     }
     
     #results-carousel .carousel-inner .carousel-item .movie-poster {
-        min-height: 80vh;
-        max-height: 80vh;
+        min-height: 50vh;
+        max-height: 50vh;
         width: auto;
         margin: 0 auto;
+    }
+
+    #carousel-information {
+        min-height: 30vh;
+        max-height: 30vh;
+        line-height: 2;
     }
 
     #results-page {

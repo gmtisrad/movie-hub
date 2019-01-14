@@ -141,7 +141,7 @@ function handleSearch () {
  * getMovieData is called using the movieID value retrieved fromt the tMDB search query.
  */
 function handleMovieClick () {
-    $('.js-movie-title').on('click', function(event) {
+    $('.js-movie-poster').on('click', function(event) {
         event.preventDefault();
         let movieId = $(this).closest('.carousel-item').attr('data-id');
         getMovieData(movieId);
@@ -351,12 +351,12 @@ function renderResultsPage(searchQuery, responseJson) {
     handleMovieClick();//Event listener called
     handleReturnClick();//Event listener called
     $('.carousel').carousel();//The results carousel is initialized
-    $('.carousel-control-prev').click(function() {//Gives functionality to the carousel navigation buttons
+    $('.carousel-control-prev').click(function(event) {//Gives functionality to the carousel navigation buttons
         event.preventDefault();
         $('.carousel').carousel('prev');
     });
       
-    $('.carousel-control-next').click(function() {//Gives functionality to the carousel navigation buttons
+    $('.carousel-control-next').click(function(event) {//Gives functionality to the carousel navigation buttons
         event.preventDefault();
         $('.carousel').carousel('next');
     });
@@ -407,8 +407,8 @@ function createResultsList(responseJson) {
         let resultItemHtml = `<div data-id=${responseJson.results[i].id} class="carousel-item ${activeCarousel(i)}">
                                 <img class="d-block img-fluid movie-poster js-movie-poster" src="${imgEndpoint + responseJson.results[i].poster_path}" alt="movie poster">
                                 <div id='carousel-information' class="carousel-caption">
-                                    <h3><a href='' class='js-movie-title' style='color: white'>${responseJson.results[i].title}</a></h5>
-                                    <p>${responseJson.results[i].overview.substring(0, 275)+'...'}</p>
+                                    <h3>${responseJson.results[i].title}</h5>
+                                    <p>${responseJson.results[i].overview.substring(0, 200)+'...'}</p>
                                 </div>
                             </div>`;
             resultsListHtml.push(resultItemHtml);
