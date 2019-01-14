@@ -52,7 +52,7 @@ body {
 }
 
 .results-header {
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .hero {
@@ -84,6 +84,8 @@ body {
     max-width: 70%;
     background-color: black;
     margin: 20px 0 0 0;
+    padding: 0 10px;
+    overflow-y: auto;
 }
 
 .navbar-row {

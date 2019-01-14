@@ -408,7 +408,7 @@ function createResultsList(responseJson) {
                                 <img class="d-block img-fluid movie-poster js-movie-poster" src="${imgEndpoint + responseJson.results[i].poster_path}" alt="movie poster">
                                 <div id='carousel-information' class="carousel-caption">
                                     <h3>${responseJson.results[i].title}</h5>
-                                    <p>${responseJson.results[i].overview.substring(0, 200)+'...'}</p>
+                                    <p>${responseJson.results[i].overview.substring(0, 375)+'...'}</p>
                                 </div>
                             </div>`;
             resultsListHtml.push(resultItemHtml);
