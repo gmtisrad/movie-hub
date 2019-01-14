@@ -12,7 +12,8 @@ function renderLandingPage () {
     $('.content').empty();
     $('.content').html(landingPage);
     handleSearch();
-    handleNavClick();
+    handleSearchClick();
+    handleAboutClick();
 }
 
 /**
@@ -28,12 +29,12 @@ function createNav () {
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav js-navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="">Search</a>
+                        <a class="nav-link search-nav" href="">Search</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Contact</a>
+                        <a class="nav-link about-nav" href="">About</a>
                     </li>
                 </ul>
             </div>
@@ -42,25 +43,54 @@ function createNav () {
 }
 
 /**
- * Function - handleNavClick
- * Description - This is a delegated event handler placed on the navbar to determine what happens when a certain element is clicked.
+ * Function - handleSearchClick
+ * Description - This is an event handler placed on the navbar to determine what happens when a certain element is clicked.
  */
 //TODO: Fix this garbage
-function handleNavClick () {
-    $('.js-header-nav').on('click', 'a', function(event) {
+function handleSearchClick () {
+    $('.search-nav').on('click', function(event) {
         event.preventDefault();
-        let option = $(this).text();
-        /*
-        if ('Movie Hub' == option) {
-            renderLandingPage();
-        }
-        else if ('Search' == option) {
-            renderLandingPage();
-        }
-        else if ('Contact' == option) {
-            alert('Send me an email! (I\'ll fix this later)');
-        }*/
+        renderLandingPage();
+    });
+}
+
+/**
+ * Function - handleAboutClick
+ * Description - This is an event handler placed on the navbar to determine what happens when a certain element is clicked.
+ */
+function handleAboutClick () {
+    $('.about-nav').on('click', function(event) {
+        event.preventDefault();
+        renderAboutPage();
     })
+}
+
+/**
+ * Function - renderAboutPage
+ * Description - Renders the page that gives information about me and the project.
+ */
+function renderAboutPage () {
+    let aboutHtml = `
+    <div class='about-div'>
+        <section id='about' class='container'>
+            <h1 class='text-center'>About</h1>
+            <h3 class='text-center'>Hi, I'm Gabe!</h3>
+            <p class='text-center'>I made this project as a part of my API capstone project in my full stack web development program.</p>
+            <p class='text-center'>Every element in this project is rendered to the screen using Javascript and JQuery. The APIs used are the <a href='https://www.themoviedb.org/'>tMDB API</a>, the <a href='https://www.nytimes.com/reviews/movies'>New York Times Movie Reviews API</a> and the <a href='https://www.youtube.com/'>Youtube Data API</a>.
+            <p class='text-center'>The technologies I used are HTML, CSS, Bootstrap, Javascript and JQuery.</p>
+            <p class='text-center'>Below are a few ways you can contact me!</p>
+            <section class="social-icons text-center">
+                    <a href='https://github.com/gmtisrad'><i class="fa fa-github" style='color: black'></i></a>
+                    <a href='https://codepen.io/Gabe_M_Timm/'><i class="fa fa-codepen" style='color: black'></i></a>
+                    <a href='https://www.linkedin.com/in/gabe-m-timm/'><i class="fa fa-linkedin" style='color: black'></i></a>
+                    <a href='mailto:gabe.m.timm@gmail.com'><i class="fa fa-envelope" style='color: black'></i></a>
+                </section>
+        </section>
+    </div> `
+    $('.content').empty();
+    $('.content').html(createNav() + aboutHtml);
+    handleSearchClick();
+    handleAboutClick();
 }
 
 /**
@@ -166,6 +196,8 @@ function renderMoviePage (responseJson) {
     $('.content').html(createNav() + moviePageHtml);
     getYoutubeClips (responseJson.title);
     getMovieReviews (responseJson.title);
+    handleSearchClick();
+    handleAboutClick();
 }
 
 /**
@@ -329,6 +361,8 @@ function renderResultsPage(searchQuery, responseJson) {
         event.preventDefault();
         $('.carousel').carousel('next');
     });
+    handleSearchClick();//Event listener called
+    handleAboutClick();//Event listener called
 }
 
 /**
@@ -374,7 +408,7 @@ function createResultsList(responseJson) {
         let resultItemHtml = `<div data-id=${responseJson.results[i].id} class="carousel-item ${activeCarousel(i)}">
                                 <img class="d-block img-fluid movie-poster js-movie-poster" src="${imgEndpoint + responseJson.results[i].poster_path}" alt="movie poster">
                                 <div id='carousel-information' class="carousel-caption">
-                                    <h5><a href='' class='js-movie-title'>${responseJson.results[i].title}</a></h5>
+                                    <h3><a href='' class='js-movie-title' style='color: white'>${responseJson.results[i].title}</a></h5>
                                     <p>${responseJson.results[i].overview.substring(0, 275)+'...'}</p>
                                 </div>
                             </div>`;

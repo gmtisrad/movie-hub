@@ -123,6 +123,24 @@ body {
     font-size: .75rem;
 }
 
+#about {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    background-color: #ffffffcf;
+    font-weight: 800;
+}
+
+.about-div {
+    min-height: calc(100vh - 56px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.social-icons a {
+    font-size: 3rem;
+    color: #0000000;
+}
+
 @media screen and (min-width: 768px){
     body {
         background-size: 100% 100vh;
