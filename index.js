@@ -1,7 +1,7 @@
 'use strict'
 
 function renderLandingPage () {
-    let landingPage = createNav() + createSearch() + '</div>'; //Added an extra end div tag for my background image wrapper. gotta be a better way!
+    let landingPage = createNav() + createSearch();
 
     $('.content').empty();
     $('.content').html(landingPage);
@@ -26,8 +26,7 @@ function createNav () {
                     </li>
                 </ul>
             </div>
-        </nav>
-        <div class='background-image'>`;//This opening div tag is for my background image wrapper;
+        </nav>`;
     return navHtml;
 }
 
@@ -36,8 +35,6 @@ function handleNavClick () {
     $('.js-header-nav').on('click', 'a', function(event) {
         event.preventDefault();
         let option = $(this).text();
-
-        alert (option);
         /*
         if ('Movie Hub' == option) {
             renderLandingPage();
@@ -87,7 +84,8 @@ function handleSearch () {
 function handleMovieClick () {
     $('.js-movie-title').on('click', function(event) {
         event.preventDefault();
-        let movieId = $(this).parent().data('id');
+        let movieId = $(this).closest('.carousel-item').attr('data-id');
+        alert (movieId);
         getMovieData(movieId);
     })
 }
@@ -95,40 +93,41 @@ function handleMovieClick () {
 function renderMoviePage (responseJson) {
     let imgEndpoint = 'http://image.tmdb.org/t/p/original/';
     let moviePageHtml = `
-    <section class='content'>
-        <section class='movie-page'>
-            <section class='movie-information'>
-                <div  class='main-movie-poster'><img src='${imgEndpoint+responseJson.poster_path}' alt='movie poster'></div>
-                <p class='main-movie-title'>${responseJson.title}</p>
-                <p class='main-release-date'>${responseJson.release_date}</p>
-                <p class='main-description'>${responseJson.overview}</p>
-            </section>
-            <section class='movie-reviews'>
-                <div class='review-heading'><h5>NY Times Reviews</h5></div>
+        <section class='container' id='movie-page'>
+            <div class='row'>
+                <section id='movie-information' class='col-12 col-md-6 p-2'>
+                    <div class='row'>
+                        <div  class='main-movie-poster col'><img class='img-fluid' src='${imgEndpoint+responseJson.poster_path}' alt='movie poster'></div>
+                        <section class='col'>
+                            <h3 class='main-movie-title'>${responseJson.title}</h3>
+                            <p class='main-release-date'>${responseJson.release_date}</p>
+                            <p class='main-description'>${responseJson.overview}</p>
+                        </section>
+                    </div>
+                </section>
+            <section id='movie-reviews' class='col-12 col-md-6'>
+                <h3 class='text-center border-bottom border-dark'>NY Times Reviews</h3>
                 <section class='review-section'>
              </section>
-            </section><nav class='nav-bar'>
-            <div
-            <a href='' class=''>Movie Hub</a>
-            <a href='' class=''>Search</a>
-            <a href='' class=''>Contact</a>
-        </nav>
-            <section class='clips'>
-                <h5 class='clips-heading'>Top Clips</h5>
-                <section class='clips-section'>
-                </section>
             </section>
-            <section class='actors'>
-                <h5 class='actors-heading'>Actors</h5>
-                <section class='cast-list'>
-                    ${createCastList(responseJson)}
+            <div class='row'>
+                <section class='clips col-12 col-md-8'>
+                   <h3 class='clips-heading border-bottom border-dark'>Top Clips</h3>
+                    <section class='clips-section'>
+                    </section>
                 </section>
-            </section>
-        </section>
-    </section>`;
+                <section class='actors col-12 col-md-4'>
+                    <h3 class='text-center border-bottom border-dark'>Actors</h3>
+                    <section class='cast-list row'>
+                        ${createCastList(responseJson)}
+                    </section>
+                </section>
+                </div>
+            </div>
+        </section>`;
 
-    $('.js-hero').empty();
-    $('.js-hero').html(createNav() + moviePageHtml);
+    $('.content').empty();
+    $('.content').html(createNav() + moviePageHtml);
     getYoutubeClips (responseJson.title);
     getMovieReviews (responseJson.title);
 }
@@ -147,9 +146,9 @@ function renderYoutubeClips (responseJson) {
     let youtubeClipsHtml = [];
 
     for (let i = 0; i < responseJson.pageInfo.resultsPerPage; i++) {
-        let youtubeClipHtml = `<li class='clip-list-item'>
+        let youtubeClipHtml = `<li class='clip-list-item border-bottom border-dark'>
         <div class='clip'>
-            <div class='clip-thumbnail'><a target='_blank' href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><img src='${responseJson.items[i].snippet.thumbnails.high.url}' alt='youtube thumbnail'></a></div>
+            <div class='clip-thumbnail'><a target='_blank' href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><img class='img-fluid' src='${responseJson.items[i].snippet.thumbnails.high.url}' alt='youtube thumbnail'></a></div>
             <div class='clip-information'>
                 <p class='clip-name'>${responseJson.items[i].snippet.title}</p>
             </div>
@@ -176,7 +175,7 @@ function renderMovieReviews (responseJson) {
     let movieReviews = [];
 
     for (let i = 0; i < responseJson.num_results; i++) {
-        let movieReview = `<li class='review'>
+        let movieReview = `<li class='review border-bottom border-dark'>
         <h4>${responseJson.results[i].headline}</h4>
         <h5>Author: ${responseJson.results[i].byline}</h5>
         <p>Summary: ${responseJson.results[i].summary_short}</p>
@@ -199,20 +198,17 @@ function createCastList (responseJson) {
     let imgEndpoint = 'http://image.tmdb.org/t/p/w500/';
 
     for (let i = 0; i < responseJson.credits.cast.length; i++) {
-        let castMember = `<li class='actor'>
-        <div class='actor-profile'>
-            <div class='actor-image'><img src='${imgEndpoint + responseJson.credits.cast[i].profile_path}' alt='actor image'></div>
+        let castMember = `
+        <div class='actor-profile col-6'>
+            <div class='actor-image'><img class='img-fluid' src='${imgEndpoint + responseJson.credits.cast[i].profile_path}' alt='actor image'></div>
             <div class='actor-info'>
                 <p class='actor-data character-name'>${responseJson.credits.cast[i].character}</p>
                 <p class='actor-data actor-name'>${responseJson.credits.cast[i].name}</p>
             </div>
-        </div>
-    </li>`;
+        </div>`;
     castList.push(castMember);
     }
-    castList.unshift(`<ul class='actors-list'>`);
-    castList.push(`</ul>`);
-    return castList.join(' ');
+    return castList.join('');
 }
 
 function getMovieData(movieId) {
@@ -274,17 +270,17 @@ function createResultsList(responseJson) {
 
     for (let i = 0; i < getNumResults(responseJson.total_results); i++) {
         let activeCarousel = (i) => {if(i == 0) {return 'active';}};
-        let resultItemHtml = `<div data-id=${responseJson.results[i].id} class="carousel-item w-100 ${activeCarousel(i)}">
-                                <img class="d-block img_responsive movie-poster js-movie-poster" src="${imgEndpoint + responseJson.results[i].poster_path}" alt="movie poster">
+        let resultItemHtml = `<div data-id=${responseJson.results[i].id} class="carousel-item ${activeCarousel(i)}">
+                                <img class="d-block img-fluid movie-poster js-movie-poster" src="${imgEndpoint + responseJson.results[i].poster_path}" alt="movie poster">
                                 <div id='carousel-information' class="carousel-caption">
-                                    <h5>${responseJson.results[i].title}</h5>
+                                    <h5><a href='' class='js-movie-title'>${responseJson.results[i].title}</a></h5>
                                     <p>${responseJson.results[i].overview.substring(0, 275)+'...'}</p>
                                 </div>
                             </div>`;
             resultsListHtml.push(resultItemHtml);
     }
     resultsListHtml.unshift(`<div id='results-carousel' class="carousel slide">
-                                <div class="carousel-inner w-100">`);
+                                <div class="carousel-inner">`);
     resultsListHtml.push(`</div>
                             <a id='left-control' class="carousel-control-prev" href="" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

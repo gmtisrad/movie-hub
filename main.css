@@ -1,4 +1,4 @@
-html, body, .hero {
+html {
     height: 100%;
     width: 100%;
 }
@@ -6,23 +6,29 @@ html, body, .hero {
     box-sizing: border-box;
 }
 
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('img/la_cinema.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.row {
+    overflow-x: hidden;
+}
+
 .hidden {
     display: none;
 }
 
 .search-page {
-    height: 100%; /*Sets height to browser height minus the height of the navbar to prevent overflow*/
+    height: calc(100vh - 56px); /*Sets height to browser height minus the height of the navbar to prevent overflow*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.background-image {
-    height: calc(100vh - 56px); /*Sets height to browser height minus the height of the navbar to prevent overflow*/
-    height: calc(100% - 56px); /*For browsers that don't support vh*/
-    background-image: url('img/la_cinema.jpg');
-    background-size: cover;
 }
 
 .search-row {
@@ -38,10 +44,6 @@ html, body, .hero {
 .movie-poster {
     max-width: 100%;
     height: auto;
-}
-.content {
-    height: inherit;
-    width: inherit;
 }
 
 .results-header {
@@ -69,9 +71,8 @@ html, body, .hero {
 
 #results-carousel .carousel-inner .carousel-item .movie-poster {
     min-height: 500px;
-    max-height: 100%;
+    max-height: 80vh;
     width: auto;
-    object-fit: cover;
     margin: 0 auto;
 }
 
@@ -79,8 +80,6 @@ html, body, .hero {
     width: 100vw;
     width: 100%;
 }
-
-
 
 #carousel-information {
     background-color: #0000007a;
@@ -92,12 +91,43 @@ html, body, .hero {
     background-color: #1d1d1dc2;
 }
 
+#movie-page {
+    background-color: #ffffffcf;
+}
+
+#movie-reviews {
+    border-radius: 10px;
+}
+
+.reviews-list {
+    list-style: none;
+    padding: 0;
+}
+
+.clip-list {
+    list-style: none;
+    padding: 0;
+}
+
+.clip-thumbnail{
+    width: 25%;
+}
+
+.actors-list {
+    list-style: none;
+    padding: 0;
+}
+
 @media screen and (min-width: 768px){
+    body {
+        background-size: 100% 100vh;
+    }
+
     #results-carousel, 
     #results-carousel .carousel-inner,
     #results-carousel .carousel-inner .carousel-item {
         max-height: 80vh;
-        max-width: 500px;
+        max-width: 50vw;
     }
 
     #results-carousel .carousel-inner .carousel-item .movie-poster {
@@ -107,6 +137,12 @@ html, body, .hero {
     }
 
     #results-page {
-        max-width: 500px;
+        max-width: 50vw;
+    }
+}
+
+@media screen and (min-width: 1921px) {
+    html {
+        font-size: 1.5rem;
     }
 }
