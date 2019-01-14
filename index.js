@@ -13,7 +13,7 @@ function createNav () {
     let navHtml = `
         <nav class="navbar navbar-expand-md navbar-dark bg-dark js-header-nav">
             <a class="navbar-brand" href="#">Movie Hub</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -85,7 +85,6 @@ function handleMovieClick () {
     $('.js-movie-title').on('click', function(event) {
         event.preventDefault();
         let movieId = $(this).closest('.carousel-item').attr('data-id');
-        alert (movieId);
         getMovieData(movieId);
     })
 }
@@ -112,13 +111,13 @@ function renderMoviePage (responseJson) {
             </section>
             <div class='row'>
                 <section class='clips col-12 col-md-8'>
-                   <h3 class='clips-heading border-bottom border-dark'>Top Clips</h3>
-                    <section class='clips-section'>
+                    <h3 class='clips-heading text-center border-bottom border-dark'>Top Clips</h3>
+                    <section class='clips-section container'>
                     </section>
                 </section>
                 <section class='actors col-12 col-md-4'>
                     <h3 class='text-center border-bottom border-dark'>Actors</h3>
-                    <section class='cast-list row'>
+                    <section class='cast-list container'>
                         ${createCastList(responseJson)}
                     </section>
                 </section>
@@ -146,19 +145,16 @@ function renderYoutubeClips (responseJson) {
     let youtubeClipsHtml = [];
 
     for (let i = 0; i < responseJson.pageInfo.resultsPerPage; i++) {
-        let youtubeClipHtml = `<li class='clip-list-item border-bottom border-dark'>
-        <div class='clip'>
-            <div class='clip-thumbnail'><a target='_blank' href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><img class='img-fluid' src='${responseJson.items[i].snippet.thumbnails.high.url}' alt='youtube thumbnail'></a></div>
-            <div class='clip-information'>
-                <p class='clip-name'>${responseJson.items[i].snippet.title}</p>
+        let youtubeClipHtml = `
+        <div class='clip row border-bottom border-dark'>
+            <div class='col-4'><img class='img-fluid img-thumbnail' src='${responseJson.items[i].snippet.thumbnails.high.url}' alt='youtube thumbnail'></div>
+            <div class='clip-information col-8'>
+                <a target='_blank' href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><p class='clip-name'>${responseJson.items[i].snippet.title}</p></a>
             </div>
-        </div>
-    </li>`;
+        </div>`;
         youtubeClipsHtml.push(youtubeClipHtml);
     }
 
-    youtubeClipsHtml.unshift(`<ul class='clip-list'>`);
-    youtubeClipsHtml.push('</ul>');
     $('.clips-section').html(youtubeClipsHtml.join(' '));
 }
 
@@ -199,7 +195,7 @@ function createCastList (responseJson) {
 
     for (let i = 0; i < responseJson.credits.cast.length; i++) {
         let castMember = `
-        <div class='actor-profile col-6'>
+        <div class='actor-profile col-6 col-md-4'>
             <div class='actor-image'><img class='img-fluid' src='${imgEndpoint + responseJson.credits.cast[i].profile_path}' alt='actor image'></div>
             <div class='actor-info'>
                 <p class='actor-data character-name'>${responseJson.credits.cast[i].character}</p>
@@ -208,6 +204,8 @@ function createCastList (responseJson) {
         </div>`;
     castList.push(castMember);
     }
+    castList.unshift(`<div class='row'>`);
+    castList.push(`</div>`)
     return castList.join('');
 }
 
@@ -283,12 +281,10 @@ function createResultsList(responseJson) {
                                 <div class="carousel-inner">`);
     resultsListHtml.push(`</div>
                             <a id='left-control' class="carousel-control-prev" href="" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
+                                <span class="carousel-control-prev-icon"></span>
                             </a>
                             <a id='right-control' class="carousel-control-next" href="" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
+                                <span class="carousel-control-next-icon"></span>
                             </a>
                         </div>`);
     resultsListHtml = resultsListHtml.join(' ');

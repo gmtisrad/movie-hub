@@ -54,10 +54,6 @@ body {
     padding: 0 !important;
 }
 
-#results-row {
-    max-height: 90vh;
-}
-
 #results-carousel {
     max-height: 70vh;
     min-width: auto;
@@ -118,22 +114,29 @@ body {
     padding: 0;
 }
 
+.clip-name {
+    margin: 0;
+}
+
 @media screen and (min-width: 768px){
     body {
         background-size: 100% 100vh;
     }
 
-    #results-carousel, 
+    #results-carousel,
     #results-carousel .carousel-inner,
     #results-carousel .carousel-inner .carousel-item {
         max-height: 80vh;
-        max-width: 50vw;
+        min-height: 80vh;
+        min-width: initial;
+        overflow: hidden;
     }
-
+    
     #results-carousel .carousel-inner .carousel-item .movie-poster {
-        min-height: 500px;
+        min-height: 80vh;
+        max-height: 80vh;
         width: auto;
-        object-fit: contain;
+        margin: 0 auto;
     }
 
     #results-page {
