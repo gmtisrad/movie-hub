@@ -24,7 +24,7 @@ function renderLandingPage () {
 function createNav () {
     let navHtml = `
         <nav class="navbar navbar-expand-md navbar-dark bg-dark js-header-nav">
-            <a class="navbar-brand" href="#">Movie Hub</a>
+            <span>Movie Hub</span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -74,7 +74,7 @@ function renderAboutPage () {
     <div class='about-div'>
         <section id='about' class='container'>
             <h3 class='text-center'>Hi, I'm Gabe!</h3>
-            <p class='text-center'>I made this project as a part of my API capstone project in my full stack web development program.</p>
+            <p class='text-center'>I made this project as a part of my API capstone project in my full stack web development program. It's purpose is to help you discover new movies, or even just find more information about a movie you may be interested in watching.</p>
             <p class='text-center'>Every element in this project is rendered to the screen using Javascript and JQuery. The APIs used are the <a href='https://www.themoviedb.org/'>tMDB API</a>, the <a href='https://www.nytimes.com/reviews/movies'>New York Times Movie Reviews API</a> and the <a href='https://www.youtube.com/'>Youtube Data API</a>.
             <p class='text-center'>The technologies I used are HTML, CSS, Bootstrap, Javascript and JQuery.</p>
             <p class='text-center'>Below are a few ways you can contact me!</p>
