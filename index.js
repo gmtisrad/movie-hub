@@ -246,7 +246,7 @@ function renderYoutubeClips (responseJson) {
  * The renderMovieReviews function is then called using the response JSON object. 
  */
 function getMovieReviews (movieTitle) {
-    let apiKey = '578e72e052004a08b514bb7f6963a8fc';
+    let apiKey = 'RKearf4CbZ1jHNJ6EIUyj2PAvmdQqqRa';
     let reviewEndpoint = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=${apiKey}&query=${movieTitle}`;
 
     fetch(reviewEndpoint)
