@@ -165,15 +165,15 @@ body {
     }
     
     #results-carousel .carousel-inner .carousel-item .movie-poster {
-        min-height: 50vh;
-        max-height: 50vh;
+        min-height: 60vh;
+        max-height: 60vh;
         width: auto;
         margin: 0 auto;
     }
 
     #carousel-information {
-        min-height: 30vh;
-        max-height: 30vh;
+        min-height: 20vh;
+        max-height: 20vh;
         line-height: 2;
     }
 

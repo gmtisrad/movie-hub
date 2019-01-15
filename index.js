@@ -350,7 +350,7 @@ function renderResultsPage(searchQuery, responseJson) {
     $('.content').html(resultsPage);
     handleMovieClick();//Event listener called
     handleReturnClick();//Event listener called
-    $('.carousel').carousel();//The results carousel is initialized
+    $('.carousel').carousel('{interval:false}');//The results carousel is initialized
     $('.carousel-control-prev').click(function(event) {//Gives functionality to the carousel navigation buttons
         event.preventDefault();
         $('.carousel').carousel('prev');
@@ -408,7 +408,7 @@ function createResultsList(responseJson) {
                                 <img class="d-block img-fluid movie-poster js-movie-poster" src="${imgEndpoint + responseJson.results[i].poster_path}" alt="movie poster">
                                 <div id='carousel-information' class="carousel-caption">
                                     <h3>${responseJson.results[i].title}</h5>
-                                    <p>${responseJson.results[i].overview.substring(0, 375)+'...'}</p>
+                                    <p>${responseJson.results[i].overview.substring(0, 300)+'...'}</p>
                                 </div>
                             </div>`;
             resultsListHtml.push(resultItemHtml);
