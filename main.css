@@ -1,6 +1,7 @@
 html {
     height: 100%;
     width: 100%;
+    font-family: 'Roboto', sans-serif;
 }
 *, *:before, *:after {
     box-sizing: border-box;
@@ -11,6 +12,7 @@ body {
     min-height: 100vh;
     background-image: url('img/la_cinema.jpg');
     background-attachment: fixed;
+    background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -93,6 +95,10 @@ body {
     width: 100%;
 }
 
+.navbar-brand {
+    font-family: 'Limelight', cursive;
+}
+
 #left-control,
 #right-control {
     background-color: #1d1d1dc2;
@@ -150,6 +156,10 @@ body {
     font-size: .8em;
 }
 
+#carousel-information h3 {
+    font-size: 2em;
+}
+
 @media screen and (min-width: 768px){
     body {
         background-size: 100% 100vh;
@@ -177,6 +187,11 @@ body {
         line-height: 2;
     }
 
+
+    #carousel-information h3 {
+        font-size: 1.5em;
+    }
+
     #results-page {
         max-width: 50vw;
     }
@@ -185,5 +200,9 @@ body {
 @media screen and (min-width: 1921px) {
     html {
         font-size: 2rem;
+    }
+
+    #carousel-information h3 {
+        font-size: 1.5em;
     }
 }
