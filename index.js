@@ -249,9 +249,10 @@ function getMovieReviews (movieTitle) {
     let apiKey = 'RKearf4CbZ1jHNJ6EIUyj2PAvmdQqqRa';
     let reviewEndpoint = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=${apiKey}&query=${movieTitle}`;
 
-    fetch(reviewEndpoint, {headers: {'origin' : 'https://gmtisrad.github.io/movie-hub/'}});
-    .then(response => response.json())
-    .then(responseJson => renderMovieReviews(responseJson));
+    fetch(reviewEndpoint)
+    .then(response => {if(!response.ok) {throw Error(response.msg)}response.json()})
+    .then(responseJson => renderMovieReviews(responseJson))
+    .catch(error => console.log('An error as occured ' + error));
 }
 
 
