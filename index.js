@@ -350,13 +350,13 @@ function renderResultsPage(searchQuery, responseJson) {
     $('.content').html(resultsPage);
     handleMovieClick();//Event listener called
     handleReturnClick();//Event listener called
-    $('.carousel').carousel('{interval:false}');//The results carousel is initialized
-    $('.carousel-control-prev').click(function(event) {//Gives functionality to the carousel navigation buttons
+    $('.carousel').carousel();//The results carousel is initialized
+    $('#left-control').on('click', function(event) {//Gives functionality to the carousel navigation buttons
         event.preventDefault();
         $('.carousel').carousel('prev');
     });
       
-    $('.carousel-control-next').click(function(event) {//Gives functionality to the carousel navigation buttons
+    $('#right-control').on('click', function(event) {//Gives functionality to the carousel navigation buttons
         event.preventDefault();
         $('.carousel').carousel('next');
     });
