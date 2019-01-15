@@ -40,8 +40,4 @@ Movie Hub allows you to get all of the information you need about any movie loca
 
   
 
-* Hat tip to anyone whose code was used
-
-* Inspiration
-
-* etc
+* Thanks to Heather Plumb for tons feedback on design and testing!
