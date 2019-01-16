@@ -1,208 +1,112 @@
 'use strict'
 
-/**
- * Function - renderLandingPage
- * Description - Calls the createNav and createSearch functions and combines the results into
- * the landing page's html. That html is then rendered into the 'content' element. The
- * necessary event listeners are then called.
- */
 function renderLandingPage () {
     let landingPage = createNav() + createSearch();
 
-    $('.content').empty();
-    $('.content').html(landingPage);
+    $('.js-hero').empty();
+    $('.js-hero').html(landingPage);
     handleSearch();
-    handleSearchClick();
-    handleAboutClick();
+    handleNavClick();
 }
 
-/**
- * Function - createNav 
- * Description - The navbar's html is created in this function.
- * Return navHtml - The html string for the navbar.
- */
 function createNav () {
     let navHtml = `
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark js-header-nav">
-            <span class='navbar-brand'>Movie Hub</span>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav js-navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link search-nav" href="">Search</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link about-nav" href="">About</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>`;
+    <nav class='nav-bar'>
+        <a href='' class='nav-item nav-title nav-left js-nav-title'>Movie Hub</a>
+        <a href='' class='nav-item nav-right js-nav-search'>Search</a>
+        <a href='' class='nav-item nav-right js-nav-contact'>Contact</a>
+    </nav>`;
+
     return navHtml;
 }
 
-/**
- * Function - handleSearchClick
- * Description - This is an event handler placed on the navbar to determine what happens when a certain element is clicked.
- */
 //TODO: Fix this garbage
-function handleSearchClick () {
-    $('.search-nav').on('click', function(event) {
+function handleNavClick () {
+    $('.nav-bar').on('click', 'a', function(event) {
         event.preventDefault();
-        renderLandingPage();
-    });
-}
+        let option = $(this).text();
 
-/**
- * Function - handleAboutClick
- * Description - This is an event handler placed on the navbar to determine what happens when a certain element is clicked.
- */
-function handleAboutClick () {
-    $('.about-nav').on('click', function(event) {
-        event.preventDefault();
-        renderAboutPage();
+        alert (option);
+        /*
+        if ('Movie Hub' == option) {
+            renderLandingPage();
+        }
+        else if ('Search' == option) {
+            renderLandingPage();
+        }
+        else if ('Contact' == option) {
+            alert('Send me an email! (I\'ll fix this later)');
+        }*/
     })
 }
 
-/**
- * Function - renderAboutPage
- * Description - Renders the page that gives information about me and the project.
- */
-function renderAboutPage () {
-    let aboutHtml = `
-    <div class='about-div'>
-        <section id='about' class='container'>
-            <h3 class='text-center'>Hi, I'm Gabe!</h3>
-            <p class='text-center'>I made this project as a part of my API capstone project in my full stack web development program. It's purpose is to help you discover new movies, or even just find more information about a movie you may be interested in watching.</p>
-            <p class='text-center'>Every element in this project is rendered to the screen using Javascript and JQuery. The APIs used are the <a href='https://www.themoviedb.org/'>tMDB API</a>, the <a href='https://www.nytimes.com/reviews/movies'>New York Times Movie Reviews API</a> and the <a href='https://www.youtube.com/'>Youtube Data API</a>.
-            <p class='text-center'>The technologies I used are HTML, CSS, Bootstrap, Javascript and JQuery.</p>
-            <p class='text-center'>Below are a few ways you can contact me!</p>
-            <section class="social-icons text-center">
-                    <a href='https://github.com/gmtisrad'><i class="fa fa-github" style='color: black'></i></a>
-                    <a href='https://codepen.io/Gabe_M_Timm/'><i class="fa fa-codepen" style='color: black'></i></a>
-                    <a href='https://www.linkedin.com/in/gabe-m-timm/'><i class="fa fa-linkedin" style='color: black'></i></a>
-                    <a href='mailto:gabe.m.timm@gmail.com'><i class="fa fa-envelope" style='color: black'></i></a>
-                </section>
-        </section>
-    </div> `
-    $('.content').empty();
-    $('.content').html(createNav() + aboutHtml);
-    handleSearchClick();
-    handleAboutClick();
-}
-
-/**
- * Function - createSearch
- * Description - The search portion of the landing page's html is created in this function.
- * Return searchHtml - The html string for the search form.
- */
 function createSearch() {
     let searchHtml = `
-         <div class='container search-page'>
-            <section class='row search-row'>
-                <div class='col-sm-offset-1 col-sm-10'>
-                    <h1 class='text-center'>Movie Hub</h1>
-                    <div class='row'>
-                        <form class='search-form js-search-form col-sm-12 text-center'>
-                            <div class='input-group input-group-lg mt-3'>
-                                <label class='hidden' for='movie-input'>Movie title here:</label>
-                                <input id='movie-input' class='form-control' type='text' placeholder='Movie Search!'>
-                                <div class='input-group-append'>
-                                    <button type='submit' class='btn btn-danger btn-group-secondary' value='submit'>Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
-        </div>`;
+            <section class='content search-page'>
+                <h1 class='search-header'>Movie Hub</h1>
+                <form class='search-form js-search-form'>
+                    <label class='hidden' for='movie-input'>Movie title here:</label>
+                    <input id='movie-input' type='text' placeholder='Search for your movie!'>
+                    <input type='submit' class='hidden' value='submit'>
+                </form>
+            </section>`;
     
     return searchHtml;
 }
 
-/**
- * Function - handleSearch
- * Description - This is an Event Listener for the search input form on the landing page. The value of
- * the input field is taken and used to query the tMDB API through the getResultsList function.
- */
 function handleSearch () {
     $('.search-form').on('submit', function(event) {
         event.preventDefault();
         let searchQuery = $('#movie-input').val();
+        console.log(searchQuery);
         getResultsList(searchQuery);
     });
 }
 
-/**
- * Function handleMovieClick
- * Description - This is an event listener for the movie title in the carousel. The function
- * getMovieData is called using the movieID value retrieved fromt the tMDB search query.
- */
 function handleMovieClick () {
-    $('.js-movie-poster').on('click', function(event) {
+    $('.js-movie-title').on('click', function(event) {
         event.preventDefault();
-        let movieId = $(this).closest('.carousel-item').attr('data-id');
+        let movieId = $(this).parent().data('id');
         getMovieData(movieId);
     })
 }
 
-/**
- * Function - renderMoviePage
- * Param responseJson - The response JSON object retrieved from the tMDB API.
- * Description - The movie page is rendered using the movie specific API call. This function
- * uses the functions getYoutubeClips and getMovieReviews to populate the 'review-section' and 
- * 'cast-list' elements. 
- */
 function renderMoviePage (responseJson) {
     let imgEndpoint = 'http://image.tmdb.org/t/p/original/';
     let moviePageHtml = `
-        <section class='container' id='movie-page'>
-            <div class='row'>
-                <section id='movie-information' class='col-12 col-md-6 p-2 border-bottom border-dark'>
-                    <div class='row'>
-                        <div  class='main-movie-poster col'><img class='img-fluid' src='${imgEndpoint+responseJson.poster_path}' alt='movie poster'></div>
-                        <section class='col'>
-                            <h3 class='main-movie-title'>${responseJson.title}</h3>
-                            <p class='main-release-date'>${responseJson.release_date}</p>
-                            <p class='main-description'>${responseJson.overview}</p>
-                        </section>
-                    </div>
-                </section>
-            <section id='movie-reviews' class='col-12 col-md-6 border-bottom border-dark'>
-                <h3 class='text-center border-bottom border-dark'>NY Times Reviews</h3>
-                <section class='review-section'></section>
+    <section class='content'>
+        <section class='movie-page'>
+            <section class='movie-information'>
+                <div  class='main-movie-poster'><img src='${imgEndpoint+responseJson.poster_path}' alt='movie poster'></div>
+                <p class='main-movie-title'>${responseJson.title}</p>
+                <p class='main-release-date'>${responseJson.release_date}</p>
+                <p class='main-description'>${responseJson.overview}</p>
             </section>
-            <div class='row'>
-                <section class='clips col-12 col-md-8'>
-                    <h3 class='clips-heading text-center border-bottom border-dark'>Top Clips</h3>
-                    <section class='clips-section container'>
-                    </section>
+            <section class='movie-reviews'>
+                <div class='review-heading'><h5>NY Times Reviews</h5></div>
+                <section class='review-section'>
+             </section>
+            </section>
+            <section class='clips'>
+                <h5 class='clips-heading'>Top Clips</h5>
+                <section class='clips-section'>
                 </section>
-                <section class='actors col-12 col-md-4'>
-                    <h3 class='text-center border-bottom border-dark'>Actors</h3>
-                    <section class='cast-list container'>
-                        ${createCastList(responseJson)}
-                    </section>
+            </section>
+            <section class='actors'>
+                <h5 class='actors-heading'>Actors</h5>
+                <section class='cast-list'>
+                    ${createCastList(responseJson)}
                 </section>
-                </div>
-            </div>
-        </section>`;
+            </section>
+        </section>
+    </section>`;
 
-    $('.content').empty();
-    $('.content').html(createNav() + moviePageHtml);
+    $('.js-hero').empty();
+    $('.js-hero').html(createNav() + moviePageHtml);
     getYoutubeClips (responseJson.title);
     getMovieReviews (responseJson.title);
-    handleSearchClick();
-    handleAboutClick();
 }
 
-/**
- * Function - getYoutubeClips 
- * Param movieTitle - The movie title used to query the Youtube Data API. Retrieved from the tMDB API.
- * Description - The movie title is used to query the Youtube Data API. The response JSON object is then
- * used to call the renderYoutubeClipss function.
- */
 function getYoutubeClips (movieTitle) {
     let apiKey = 'AIzaSyCz-K5-RrdLGfMlf-0Q4yhY-Bzk1CLPMfM';
     let queryString = `${movieTitle} movie clips`;
@@ -213,16 +117,9 @@ function getYoutubeClips (movieTitle) {
     .then(responseJson => renderYoutubeClips(responseJson));
 }
 
-/**
- * Function - renderYoutubeClips
- * Param responseJson - The response JSON object retrieved from the youtube data API
- * Description - The response JSON object is used to generate the html for the youtube clips section.
- * The html is then rendered into the 'clips-section' element.
- */
 function renderYoutubeClips (responseJson) {
     let youtubeClipsHtml = [];
 
-    //Clips are both created and rendered here. Could be seperated.
     for (let i = 0; i < responseJson.pageInfo.resultsPerPage; i++) {
         let youtubeClipHtml = `<li class='clip-list-item'>
         <div class='clip'>
@@ -230,23 +127,20 @@ function renderYoutubeClips (responseJson) {
             <div class='clip-information'>
             <a target='_blank' href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><p class='clip-name'>${responseJson.items[i].snippet.title}</p></a>
             </div>
-        </div>`;
+        </div>
+    </li>`;
         youtubeClipsHtml.push(youtubeClipHtml);
     }
 
+    youtubeClipsHtml.unshift(`<ul class='clip-list'>`);
+    youtubeClipsHtml.push('</ul>');
     $('.clips-section').html(youtubeClipsHtml.join(' '));
 }
 
-/**
- * Function - getMovieReviews
- * Param movieTitle - The movie title retrieved by the tMDB API.
- * Description - The NY Times movie review API is queried using the movie title retrieved by the tMDB API.
- * The renderMovieReviews function is then called using the response JSON object. 
- */
 function getMovieReviews (movieTitle) {
     let apiKey = 'RKearf4CbZ1jHNJ6EIUyj2PAvmdQqqRa';
     let reviewEndpoint = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=${apiKey}&query=${movieTitle}`;
-    
+
     fetch(reviewEndpoint)
     .then(response => response.json())
     .then(responseJson => renderMovieReviews(responseJson, movieTitle));
@@ -255,15 +149,6 @@ function getMovieReviews (movieTitle) {
 function renderMovieReviews (responseJson, movieTitle) {
     let movieReviews = [];
 
-/**
- * Function - renderMovieReviews
- * Param responseJson - The response JSON object containing the NY Times movie review data
- * Description - The movie review data is converted into html and pushed into an array.
- * The array is then joined and rendered into the 'review-section' element.
- */
-function renderMovieReviews (responseJson, movieTitle) {
-    let movieReviews = [];
-    //The movie review section's html is both created and rendered here. Could be seperated.
     for (let i = 0; i < responseJson.num_results; i++) {
         if (movieTitle == responseJson.results[i].display_title){
         let movieReview = `<li class='review'>
@@ -275,8 +160,8 @@ function renderMovieReviews (responseJson, movieTitle) {
         }
     }
 
-    movieReviews.unshift('<div class=\'reviews-list row\'>');
-    movieReviews.push('</div');
+    movieReviews.unshift('<ul class=\'reviews-list\'>');
+    movieReviews.push('</ul');
     if(responseJson.num_results != 0){
       $('.review-section').html(movieReviews.join(' '));
     }
@@ -285,40 +170,27 @@ function renderMovieReviews (responseJson, movieTitle) {
     }
 }
 
-/**
- * Function - createCastList
- * Param responseJson - The response JSON object containing the cast JSON data
- * Description - Each cast member is used to create a bootstrap column in html, then pushed into an array.
- * The array is then joined and returned.
- * Returns castList - The cast list html string.
- */
 function createCastList (responseJson) {
     let castList = [];
     let imgEndpoint = 'http://image.tmdb.org/t/p/w500/';
 
     for (let i = 0; i < responseJson.credits.cast.length; i++) {
-        let castMember = `
-        <div class='actor-profile col-6 col-md-4'>
-            <div class='actor-image'><img class='img-fluid' src='${imgEndpoint + responseJson.credits.cast[i].profile_path}' alt='actor image'></div>
+        let castMember = `<li class='actor'>
+        <div class='actor-profile'>
+            <div class='actor-image'><img src='${imgEndpoint + responseJson.credits.cast[i].profile_path}' alt='actor image'></div>
             <div class='actor-info'>
-                <p class='actor-data border-bottom border-info'>${responseJson.credits.cast[i].character}</p>
+                <p class='actor-data character-name'>${responseJson.credits.cast[i].character}</p>
                 <p class='actor-data actor-name'>${responseJson.credits.cast[i].name}</p>
             </div>
-        </div>`;
+        </div>
+    </li>`;
     castList.push(castMember);
     }
-    castList.unshift(`<div class='row'>`);
-    castList.push(`</div>`)
-    return castList.join('');
+    castList.unshift(`<ul class='actors-list'>`);
+    castList.push(`</ul>`);
+    return castList.join(' ');
 }
 
-
-/**
- * Function - getMovieData 
- * Param movieId - The ID of the movie retrieved by tMDB API.
- * Description - The movieId parameter is used to query the tMDB api. The response JSON object is then used to
- * render the movie page.
- */
 function getMovieData(movieId) {
     let api_key = '7087ed750c60817c883cf6512c1c0f1c';
     let movieURL = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_to_response=credits`;
@@ -328,50 +200,22 @@ function getMovieData(movieId) {
     .then(responseJson => renderMoviePage(responseJson));
 }
 
-
-/**
- * Function - renderResultsPage
- * Param searchQuery - The query string taken by the search input field on the landing page
- * Param responseJson - The JSON response object of the results returned by the tMDB API
- * Description - This function uses the response JSON object to create the results page. It then 
- * renders it to the content <div> using jquery.
- */
 function renderResultsPage(searchQuery, responseJson) {
     let resultsHtml = `
-        <section class='container' id='results-page'>
-            <section id='results-row' class='results js-results row'>
-                <div class='text-left mt-3 mb-3 col-12'>
-                    <h2 class='results-header'>Results for '${searchQuery}'</h1>
-                    ${createResultsList(responseJson)}
-                    <button type='button' class='btn btn-info btn-block mb-3 return-button js-return-button'>Return to search</button>
-                </div>
-            </section>
+    <section class='content results-page'>
+        <section class='results js-results'>
+        <h1 class='results-header'>Results for '${searchQuery}'</h1>
+            ${createResultsList(responseJson)}
+            <button class='return-button js-return-button'>Return to search</button>
+        </section>
     </section>`
     let resultsPage = createNav() + resultsHtml;
-    $('.content').empty();
-    $('.content').html(resultsPage);
-    handleMovieClick();//Event listener called
-    handleReturnClick();//Event listener called
-    $('.carousel').carousel();//The results carousel is initialized
-    $('#left-control').on('click', function(event) {//Gives functionality to the carousel navigation buttons
-        event.preventDefault();
-        $('.carousel').carousel('prev');
-    });
-      
-    $('#right-control').on('click', function(event) {//Gives functionality to the carousel navigation buttons
-        event.preventDefault();
-        $('.carousel').carousel('next');
-    });
-    handleSearchClick();//Event listener called
-    handleAboutClick();//Event listener called
+    $('.js-hero').empty();
+    $('.js-hero').html(resultsPage);
+    handleMovieClick();
+    handleReturnClick();
 }
 
-/**
- * Function - handleReturnClick
- * Param - None
- * Description - This function is an event listener for the return button on the bottom of my
- * results page. It returns the user to the landing page.
- */
 function handleReturnClick () {
   $('.js-return-button').on('click', event =>{
     event.preventDefault();
@@ -379,12 +223,6 @@ function handleReturnClick () {
   })
 }
 
-/**
-*Function - getResultsList
-*Param searchQuery - The query string taken by the search input. (Must be a movie title)
-*Description - This function queries the tMDB API and calls the renderResultsPage function 
-*with the query string and response data.
-*/
 function getResultsList(searchQuery) {
     let resultsListHtml = '';
     let api_key = '7087ed750c60817c883cf6512c1c0f1c'
@@ -393,48 +231,26 @@ function getResultsList(searchQuery) {
     .then(responseJson => renderResultsPage(searchQuery, responseJson));
 }
 
-/**
-*Function - createResultsList
-*Param responseJson - The Json object retrieved from the tMDB API with the fetch API
-*Descrtiption - This function takes the JSON object and creates the html needed to display the results
-*in a bootstrap carousel. That html is then returned.
-*/
 function createResultsList(responseJson) {
     let imgEndpoint = 'http://image.tmdb.org/t/p/original/';
     let resultsListHtml = [];
-    
 
     for (let i = 0; i < getNumResults(responseJson.total_results); i++) {
-        let activeCarousel = (i) => {if(i == 0) {return 'active';}};
-        let resultItemHtml = `<div data-id=${responseJson.results[i].id} class="carousel-item ${activeCarousel(i)}">
-                                <img class="d-block img-fluid movie-poster js-movie-poster" src="${imgEndpoint + responseJson.results[i].poster_path}" alt="movie poster">
-                                <div id='carousel-information' class="carousel-caption">
-                                    <h3>${responseJson.results[i].title}</h5>
-                                    <p>${responseJson.results[i].overview.substring(0, 250)+'...'}</p>
-                                </div>
-                            </div>`;
+        let resultItemHtml = `
+            <li data-id=${responseJson.results[i].id} class='result-item js-result-item'>
+                <img src='${imgEndpoint + responseJson.results[i].poster_path}' class='movie-poster js-movie-poster' alt='movie poster'>
+                <a class='movie-title js-movie-title' href=''>${responseJson.results[i].title}</a><br/>
+                <span class='release-date'>${responseJson.results[i].release_date}</span>
+                <p class='description'>${responseJson.results[i].overview}</p>
+            </li>`;
             resultsListHtml.push(resultItemHtml);
     }
-    resultsListHtml.unshift(`<div id='results-carousel' class="carousel slide">
-                                <div class="carousel-inner">`);
-    resultsListHtml.push(`</div>
-                            <a id='left-control' class="carousel-control-prev" href="" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                            </a>
-                            <a id='right-control' class="carousel-control-next" href="" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </a>
-                        </div>`);
+    resultsListHtml.unshift(`<ul class='results-list'>`);
+    resultsListHtml.push('</ul>')
     resultsListHtml = resultsListHtml.join(' ');
     return resultsListHtml;
 }
-/**
-*Function - getNumResults
-*Param numResults - The number of results returned by the tMDB api
-*Description - I set a limit to the number of results to be displayed because the api
-*returns a lot of irrelevant data after a certain point. 
-*Note - I may remove this if people end up needing all of the data
-*/
+
 function getNumResults(numResults) {
     if (numResults > 20) {
         return 20;

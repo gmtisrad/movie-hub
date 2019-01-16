@@ -1,205 +1,582 @@
 html {
-    height: 100%;
+    box-sizing: border-box !important;
+    font-size: 22px;
+    min-height: 100%;
     width: 100%;
-    font-family: 'Roboto', sans-serif;
-    background-color: #fefefe;
-}
-*, *:before, *:after {
-    box-sizing: border-box;
+    background-image: url('images/la_cinema.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 body {
+    min-height: 100%;
     width: 100%;
-    min-height: 100vh;
-    background-image: url('img/la_cinema.jpg');
-    background-attachment: fixed;
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    margin: 0;
+    padding-top: 60px;
 }
 
-.content {
-    min-height: 100vh;
-    background-color: #fffffff0;
+*, *:after, *:before {
+    box-sizing: inherit;
 }
 
-.row {
-    overflow-x: hidden;
+.nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    min-width: 100%;
+    height: 60px;
+    background-color: grey;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 100;
+}
+
+.nav-bar a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.nav-left {
+    position: absolute;
+    left: 0;
+    font-size: 26px;
+}
+
+.nav-item {
+    margin: 0 10px;
 }
 
 .hidden {
     display: none;
 }
 
-.search-page {
-    height: calc(100vh - 56px); /*Sets height to browser height minus the height of the navbar to prevent overflow*/
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.search-row {
-    padding: 5vh 0 5vh 0;
-    border-radius: 10px;
-    background-color: #0000007a;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-}
-
-.movie-poster {
-    max-width: 100%;
-    height: auto;
-}
-
-.results-header {
-    font-size: 1rem;
-}
-
 .hero {
-    padding: 0 !important;
-}
-
-#results-carousel,
-#results-carousel .carousel-inner,
-#results-carousel .carousel-inner .carousel-item {
-    max-height: 70vh;
-    min-height: 70vh;
-    min-width: auto;
-    overflow: hidden;
-    background: white;
-}
-
-#results-carousel .carousel-inner .carousel-item .movie-poster {
-    min-height: 40vh;
-    max-height: 40vh;
-    margin: 0 auto;
-    width: auto;
-}
-
-#carousel-information {
-    position: relative;
-    left: 15%;
-    min-height: 30vh;
-    max-height: 30vh;
-    max-width: 70%;
-    background-color: black;
-    margin: 20px 0 0 0;
-    padding: 0 10px;
-    overflow-y: auto;
-}
-
-.navbar-row {
-    width: 100vw;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    min-height: 100%;
     width: 100%;
 }
 
-.navbar-brand {
-    font-family: 'Limelight', cursive;
+.content {
+    max-width: 310px;
+    margin: 0 auto;
 }
 
-#left-control,
-#right-control {
-    background-color: #1d1d1dc2;
+.search-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+}
+
+.search-header {
+    font-size: 52px;
+    width: 310px;
+    margin: 0 0 32px;
+}
+
+#movie-input {
+    padding: 10px;
+    font-size: 28px;
+    width: 310px;
+    border-radius: 150px;
+}
+
+.results-list {
+    padding: 0;
+}
+
+.results {
+    display: inline-block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.results-list {
+    column-count: 1;
+    column-width: 310px;
+    column-fill: balance;
+}
+
+.movie-poster {
+    float: left;
+}
+
+.result-item {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 30px;
+    break-inside: avoid;
+}
+
+.return-button {
+    display: block;
+    padding:10px;
+    margin: 10px auto;
+}
+
+.movie-poster {
+    float: left;
+    width: 100%;
+    height: auto;
+}
+
+.movie-title {
+    float: left;
+    text-align: left;
+    font-weight: 600;
+    padding: 0;
+    margin: 0;
+}
+
+.release-date {
+    float: left;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.description {
+    clear: both;
+}
+
+.results-header {
+    margin: 10px auto;
+}
+
+.main-movie-title {
+    font-weight: 600;
+    margin: 0;
+}
+
+.main-release-date {
+    font-weight: 300;
+    font-size: 18px;
+    margin: 0 0 10px 0;
+}
+
+.main-description {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.movie-information {
+    box-sizing: border-box;
+    overflow-y: auto;
+    margin: 10px 0;
+    break-inside: avoid;
+}
+
+.main-movie-poster {
+    max-width: 100%;
+    height: auto;
+    float: left;
+    margin: 0 auto;
+}
+
+.main-movie-poster img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+#more-button {
+    padding: 25px 0px;
+    margin: 0 auto 20px;
+    width: 120px;
+}
+
+.movie-reviews {
+    min-width: 310px;
+    max-width: 310px;
+    margin-bottom: 10px;
+    break-inside: avoid;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+
+.review {
+    border-bottom: 1px solid black;
+}
+
+.review-heading {
+    text-align: center;
+    max-height: 10%;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+.review-heading h5 {
+    margin: 0;
+}
+
+.reviews {
+    max-width: 310px;
+    min-width: 310px;
+    max-height: 400px;
+    min-height: 400px;
+    box-sizing: border-box;
 }
 
 .reviews-list {
     list-style: none;
+    height: inherit;
+    width: 100%;
     padding: 0;
+    margin: 0;
 }
 
-.clip-list {
-    list-style: none;
-    padding: 0;
+.review-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
-.clip-thumbnail{
-    width: 25%;
+.actors {
+    min-width: 310px;
+    max-width: 310px;
+    display: flex; 
+    flex-direction: column;
+    border: 1px solid black;
+    break-inside: avoid;
+    margin-bottom: 30px;
+}
+
+.actors-heading {
+    text-align: center;
+    padding: 10px 0;
+    max-height: 10%;
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid black;
 }
 
 .actors-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     list-style: none;
     padding: 0;
+    margin: 0;
+    z-index: 0
 }
 
-.clip-name {
-    margin: 0;
+.actor {
+    border: 1px solid black;
+    margin: 10px;
+    width: 95%;
+}
+
+.actor-profile {
+    min-height: 100px;
+    max-height: 100px;
+}
+
+.actor-image {
+    height: 100px;
+    width: auto;
+    float: left;
+    margin-right: 10px;
+}
+
+.actor-image img{
+    height: 100%;
+    width: auto;
 }
 
 .actor-data {
+    padding: 0;
     margin: 0;
-    font-size: .75rem;
 }
 
-#about {
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-    font-weight: 800;
+.actor-info {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
-.about-div {
-    min-height: calc(100vh - 56px);
+.character-name {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.actor-name {
+    font-size: 20px; 
+    font-weight: 400;
+}
+
+.actor-page {
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.clips {
+    border: 1px solid black;
+    min-width: 310px;
+    max-width: 310px;
+    margin: 10px 0;
+    display: flex;
+    break-inside: avoid;
+    flex-direction: column;
+}
+
+.clips-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.clips-heading {
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding: 10px 0;
+    margin: 0;
+    width: 100%;
+}
+
+.clip-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 100%;
+}
+
+.clip-list-item {
+    border: 1px solid black;
+    margin: 10px;
+    width: 95%;
+}
+
+.clip-list-item p {
+    margin: 0;
+    font-size: .75em;
+}
+
+.clip-thumbnail{
+    height: 100px;
+    width: 100px;
+    margin-right: 10px;
+    float: left;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.social-icons a {
-    font-size: 3rem;
+
+.clip-thumbnail img {
+    width: 100px;
+    height: auto;
 }
 
-.js-movie-title {
-    font-size: .8em;
+.clip-information {
+    height: 100px;
+    overflow-y: auto;
 }
 
-#carousel-information h3 {
-    font-size: 2em;
+.clip-name {clip
+    font-weight: 600;
+    font-size: 18px;
 }
 
-@media screen and (min-width: 768px){
-    body {
-        background-size: 100% 100vh;
+.clip-channel {
+    font-size: 16px;
+    font-weight: 4clip00;
+    margin-bottom: 4px !important;
+    border-bottom:clipclip 1px solid black;
+}
+
+.clip-description {
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 200;
+}
+
+.movie-page {
+    height: 100%;
+    width: 100%;
+    column-count: 1;
+    column-width: 300px;
+    column-gap: 30px;
+    column-fill: balance;
+    display: inline;
+    
+}
+
+@media screen and (min-width: 700px) {
+    .content {
+        width: 90vw;
+        max-width: initial;
     }
 
-    #results-carousel,
-    #results-carousel .carousel-inner,
-    #results-carousel .carousel-inner .carousel-item {
-        max-height: 80vh;
-        min-height: 80vh;
-        min-width: initial;
-        overflow: hidden;
+    .movie-page {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .main-movie-poster {
+        height: auto;
+        width: 45%;
+        max-height: 100%;
+        padding-right: 5%;
     }
     
-    #results-carousel .carousel-inner .carousel-item .movie-poster {
-        min-height: 60vh;
-        max-height: 60vh;
-        width: auto;
-        margin: 0 auto;
+    .main-movie-poster img {
+        height: auto;
+        width: 100%;
     }
 
-    #carousel-information {
-        min-height: 20vh;
-        max-height: 20vh;
-        line-height: 2;
+    .movie-information {
+        margin: 30px 0 0 0;
+        max-width: 45%;
+        min-width: 45%;
     }
 
-
-    #carousel-information h3 {
-        font-size: 1.5em;
+    .actors {
+        display: flex;
+        flex-direction: column;
+        min-width: 100%;
     }
 
-    #results-page {
-        max-width: 50vw;
+    .actor {
+        min-width: 45%;
+        max-width: 45%;
+    }
+
+    .actors-list {
+        display: flex; 
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .movie-reviews {
+        min-width: initial;
+        max-width: initial;
+        margin: 30px 0 0 auto;
+        break-inside: avoid;
+        min-height: initial;
+        max-width: 45%;
+        min-width: 45%;
+    }
+
+    .review-section {
+        min-height: 90%;
+        max-height: 90%;
+    }
+
+    .review {
+        margin: 20px;
+        font-size: 26px;
+    }
+
+    .results-list {
+        column-count: 3;
+        column-width: 310px;
+        column-fill: balance;
+    }    
+
+    .results {
+        width: 100%;
+    }
+
+    .clips {
+        margin: 30px 0;
+        display: inline-block;
+        min-width: initial;
+        max-width: initial;
+    }
+
+    .clip-thumbnail {
+        width: 133px;
+    }
+
+    .clip-thumbnail img {
+        width: 100%;
+        height: auto;
+    }
+
+    .clip-list {
+        min-width: 100%;
+        height: 100%;
+        display: flex; 
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: flex-start;
+        align-items: space-evenly;
     }
 }
 
-@media screen and (min-width: 1921px) {
-    html {
-        font-size: 2rem;
+@media screen and (min-width: 1280px) {
+    .content {
+        max-width: 1200px !important;
     }
 
-    #carousel-information h3 {
-        font-size: 1.5em;
+    .results-list {
+        column-count: 3;
+        column-width: 310px;
+        column-fill: balance;
+    }    
+
+    .main-movie-poster img {
+        height: auto;
+        width: 100%;
     }
+
+    .actors-list {
+        display: flex; 
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: flex-start;
+        align-items: space-evenly;
+    }
+
+    .actor {
+        max-width: 30%;
+        min-width: 30%;
+    }
+
+    .movie-reviews {
+        margin: 30px 0 0 auto;
+    }
+
+    .review {
+        margin: 20px;
+        font-size: 26px;
+    }
+
+    .clip-list-item {
+        max-width: 45%;
+        min-width: 45%;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .results-list {
+        column-count: 5;
+        column-width: 310px;
+        column-fill: balance;
+    }    
 }
