@@ -159,7 +159,7 @@ function renderMoviePage (responseJson) {
     let moviePageHtml = `
         <section class='container' id='movie-page'>
             <div class='row'>
-                <section id='movie-information' class='col-12 col-md-6 p-2'>
+                <section id='movie-information' class='col-12 col-md-6 p-2 border-bottom border-dark'>
                     <div class='row'>
                         <div  class='main-movie-poster col'><img class='img-fluid' src='${imgEndpoint+responseJson.poster_path}' alt='movie poster'></div>
                         <section class='col'>
@@ -169,10 +169,9 @@ function renderMoviePage (responseJson) {
                         </section>
                     </div>
                 </section>
-            <section id='movie-reviews' class='col-12 col-md-6'>
+            <section id='movie-reviews' class='col-12 col-md-6 border-bottom border-dark'>
                 <h3 class='text-center border-bottom border-dark'>NY Times Reviews</h3>
-                <section class='review-section'>
-             </section>
+                <section class='review-section'></section>
             </section>
             <div class='row'>
                 <section class='clips col-12 col-md-8'>
@@ -266,17 +265,17 @@ function renderMovieReviews (responseJson, movieTitle) {
     //The movie review section's html is both created and rendered here. Could be seperated.
     for (let i = 0; i < responseJson.num_results; i++) {
         if (movieTitle == responseJson.results[i].display_title){
-            let movieReview = `<li class='review border-bottom border-dark'>
+            let movieReview = `<div class='review col-12'>
                 <h4><a href='${responseJson.results[i].link.url}'>${responseJson.results[i].headline}</a></h4>
                 <h5>Author: ${responseJson.results[i].byline}</h5>
                 <p>Summary: ${responseJson.results[i].summary_short}</p>
-            </li>`;
+            </div>`;
             movieReviews.push(movieReview);
         }
     }
 
-    movieReviews.unshift('<ul class=\'reviews-list\'>');
-    movieReviews.push('</ul');
+    movieReviews.unshift('<div class=\'reviews-list row\'>');
+    movieReviews.push('</div');
     if(responseJson.num_results != 0){
       $('.review-section').html(movieReviews.join(' '));
     }
