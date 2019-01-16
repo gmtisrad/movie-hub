@@ -13,7 +13,7 @@ function renderLandingPage () {
 function createNav () {
     let navHtml = `
     <nav class='nav-bar'>
-        <a href='' class='nav-item nav-title nav-left js-nav-title'>Movie Hub</a>
+        <span class='nav-item nav-title nav-left js-nav-title'>Movie Hub</span>
         <a href='' class='nav-item nav-right js-nav-search'>Search</a>
         <a href='' class='nav-item nav-right js-nav-About'>About</a>
     </nav>`;
@@ -39,9 +39,9 @@ function renderAboutPage () {
     let aboutHtml = `
         <section id='about'>
             <h3>Hi, I'm Gabe!</h3>
-            <p>I made this project as a part of my API capstone project in my full stack web development program. It's purpose is to help you discover new movies, or even just find more information about a movie you may be interested in watching.</p>
+            <p>The purpose of Movie Hub to help you discover new movies, or even just find more information about a movie you may be interested in watching.</p>
             <p>Every element in this project is rendered to the screen using Javascript and JQuery. The APIs used are the <a href='https://www.themoviedb.org/'>tMDB API</a>, the <a href='https://www.nytimes.com/reviews/movies'>New York Times Movie Reviews API</a> and the <a href='https://www.youtube.com/'>Youtube Data API</a>.
-            <p>The technologies I used are HTML, CSS, Bootstrap, Javascript and JQuery.</p>
+            <p>The technologies I used are HTML, CSS, Javascript and JQuery.</p>
             <p>Below are a few ways you can contact me!</p>
             <section class="social-icons">
                     <a href='https://github.com/gmtisrad'><i class="fa fa-github" style='color: black'></i></a>
@@ -224,7 +224,7 @@ function renderResultsPage(searchQuery, responseJson) {
     let resultsHtml = `
     <section class='content results-page'>
         <section class='results js-results'>
-        <h1 class='results-header'>Results for '${searchQuery}'</h1>
+        <h5 class='results-header'>Results for '${searchQuery}'</h5>
             ${createResultsList(responseJson)}
             <button class='return-button js-return-button'>Return to search</button>
         </section>
