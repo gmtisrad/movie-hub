@@ -224,11 +224,11 @@ function renderYoutubeClips (responseJson) {
 
     //Clips are both created and rendered here. Could be seperated.
     for (let i = 0; i < responseJson.pageInfo.resultsPerPage; i++) {
-        let youtubeClipHtml = `
-        <div class='clip row border-bottom border-dark'>
-            <div class='col-4'><img class='img-fluid img-thumbnail' src='${responseJson.items[i].snippet.thumbnails.high.url}' alt='youtube thumbnail'></div>
-            <div class='clip-information col-8'>
-                <a target='_blank' href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><p class='clip-name'>${responseJson.items[i].snippet.title}</p></a>
+        let youtubeClipHtml = `<li class='clip-list-item'>
+        <div class='clip'>
+            <div class='clip-thumbnail'><img src='${responseJson.items[i].snippet.thumbnails.high.url}' alt='youtube thumbnail'></div>
+            <div class='clip-information'>
+            <a target='_blank' href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><p class='clip-name'>${responseJson.items[i].snippet.title}</p></a>
             </div>
         </div>`;
         youtubeClipsHtml.push(youtubeClipHtml);
@@ -249,10 +249,11 @@ function getMovieReviews (movieTitle) {
     
     fetch(reviewEndpoint)
     .then(response => response.json())
-    .then(responseJson => renderMovieReviews(responseJson, movieTitle))
-    .catch(error => console.log('An error as occured ' + error));
+    .then(responseJson => renderMovieReviews(responseJson, movieTitle));
 }
 
+function renderMovieReviews (responseJson, movieTitle) {
+    let movieReviews = [];
 
 /**
  * Function - renderMovieReviews
@@ -265,11 +266,11 @@ function renderMovieReviews (responseJson, movieTitle) {
     //The movie review section's html is both created and rendered here. Could be seperated.
     for (let i = 0; i < responseJson.num_results; i++) {
         if (movieTitle == responseJson.results[i].display_title){
-            let movieReview = `<div class='review col-12'>
-                <h4><a href='${responseJson.results[i].link.url}'>${responseJson.results[i].headline}</a></h4>
+        let movieReview = `<li class='review'>
+            <a href='${responseJson.results[i].link.url}'><h4>${responseJson.results[i].headline}</h4></a>
                 <h5>Author: ${responseJson.results[i].byline}</h5>
                 <p>Summary: ${responseJson.results[i].summary_short}</p>
-            </div>`;
+            </li>`;
             movieReviews.push(movieReview);
         }
     }
