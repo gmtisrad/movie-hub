@@ -94,8 +94,8 @@ function renderMoviePage (responseJson) {
         <section class='movie-page'>
             <section class='movie-information'>
                 <div  class='main-movie-poster'><img src='${imgEndpoint+responseJson.poster_path}' alt='movie poster'></div>
-                <p class='main-movie-title'>${responseJson.title}</p>
-                <p class='main-release-date'>${responseJson.release_date}</p>
+                <p class='movie-title'>${responseJson.title}</p>
+                <p class='release-date'>${responseJson.release_date}</p>
                 <p class='main-description'>${responseJson.overview}</p>
             </section>
             <section class='movie-reviews'>
