@@ -63,7 +63,7 @@ function createSearch() {
                 <form class='search-form js-search-form'>
                     <label class='hidden' for='movie-input'>Movie title here:</label>
                     <input id='movie-input' type='text' placeholder='Search for your movie!'>
-                    <input type='submit' class='hidden' value='submit'>
+                    <input type='submit' class='submit-button' value='submit'>
                 </form>
             </section>`;
     
@@ -119,6 +119,7 @@ function renderMoviePage (responseJson) {
 
     $('.js-hero').empty();
     $('.js-hero').html(createNav() + moviePageHtml);
+    window.scrollTo(0, 0);
     getYoutubeClips (responseJson.title);
     getMovieReviews (responseJson.title);
     handleSearchClick();
@@ -173,7 +174,7 @@ function renderMovieReviews (responseJson, movieTitle) {
         if (movieTitle == responseJson.results[i].display_title){
         let movieReview = `<li class='review'>
             <a href='${responseJson.results[i].link.url}'><h4>${responseJson.results[i].headline}</h4></a>
-                <h5>Author: ${responseJson.results[i].byline}</h5>
+                <h5 class='author-header'>Author: ${responseJson.results[i].byline}</h5>
                 <p>Summary: ${responseJson.results[i].summary_short}</p>
             </li>`;
             movieReviews.push(movieReview);
@@ -182,7 +183,7 @@ function renderMovieReviews (responseJson, movieTitle) {
 
     movieReviews.unshift('<ul class=\'reviews-list\'>');
     movieReviews.push('</ul');
-    if(responseJson.num_results != 0){
+    if(movieReviews.length - 2 != 0){ //Checks to see if there are any reviews present in the array
       $('.review-section').html(movieReviews.join(' '));
     }
     else {
@@ -232,6 +233,7 @@ function renderResultsPage(searchQuery, responseJson) {
     let resultsPage = createNav() + resultsHtml;
     $('.js-hero').empty();
     $('.js-hero').html(resultsPage);
+    window.scrollTo(0, 0);
     handleMovieClick();
     handleReturnClick();
     handleSearchClick();
