@@ -123,9 +123,9 @@ function renderYoutubeClips (responseJson) {
     for (let i = 0; i < responseJson.pageInfo.resultsPerPage; i++) {
         let youtubeClipHtml = `<li class='clip-list-item'>
         <div class='clip'>
-            <div class='clip-thumbnail'><a target='_blank' href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><img src='${responseJson.items[i].snippet.thumbnails.high.url}' alt='youtube thumbnail'></a></div>
+            <div class='clip-thumbnail'><img src='${responseJson.items[i].snippet.thumbnails.high.url}' alt='youtube thumbnail'></div>
             <div class='clip-information'>
-                <p class='clip-name'>${responseJson.items[i].snippet.title}</p>
+            <a target='_blank' href='https://www.youtube.com/watch?v=${responseJson.items[i].id.videoId}'><p class='clip-name'>${responseJson.items[i].snippet.title}</p></a>
             </div>
         </div>
     </li>`;
@@ -138,24 +138,26 @@ function renderYoutubeClips (responseJson) {
 }
 
 function getMovieReviews (movieTitle) {
-    let apiKey = '578e72e052004a08b514bb7f6963a8fc';
+    let apiKey = 'RKearf4CbZ1jHNJ6EIUyj2PAvmdQqqRa';
     let reviewEndpoint = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=${apiKey}&query=${movieTitle}`;
 
     fetch(reviewEndpoint)
     .then(response => response.json())
-    .then(responseJson => renderMovieReviews(responseJson));
+    .then(responseJson => renderMovieReviews(responseJson, movieTitle));
 }
 
-function renderMovieReviews (responseJson) {
+function renderMovieReviews (responseJson, movieTitle) {
     let movieReviews = [];
 
     for (let i = 0; i < responseJson.num_results; i++) {
+        if (movieTitle == responseJson.results[i].display_title){
         let movieReview = `<li class='review'>
-        <h4>${responseJson.results[i].headline}</h4>
-        <h5>Author: ${responseJson.results[i].byline}</h5>
-        <p>Summary: ${responseJson.results[i].summary_short}</p>
-    </li>`;
-        movieReviews.push(movieReview);
+            <a href='${responseJson.results[i].link.url}'><h4>${responseJson.results[i].headline}</h4></a>
+                <h5>Author: ${responseJson.results[i].byline}</h5>
+                <p>Summary: ${responseJson.results[i].summary_short}</p>
+            </li>`;
+            movieReviews.push(movieReview);
+        }
     }
 
     movieReviews.unshift('<ul class=\'reviews-list\'>');

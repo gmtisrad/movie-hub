@@ -1,12 +1,16 @@
 html {
     box-sizing: border-box !important;
     font-size: 22px;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
+    background-image: url('images/la_cinema.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 body {
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     margin: 0;
     padding-top: 60px;
@@ -55,17 +59,18 @@ body {
     position: absolute;
     top: 60px;
     left: 0;
-    height: calc(100vh - 60px);
+    background-color: rgba(255, 255, 255, 0.9);
+    min-height: 100%;
     width: 100%;
 }
 
 .content {
     max-width: 310px;
-    height: 100%;
     margin: 0 auto;
 }
 
 .search-page {
+    height: 100vh;
     display: flex;
     flex-direction: column !important;
     align-items: center !important;
@@ -93,7 +98,6 @@ body {
 .results {
     display: inline-block;
     max-width: 100%;
-    min-height: 100%;
     margin: 0 auto;
 }
 
@@ -114,7 +118,6 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
     border: 1px solid black;
-    width: 100%;
     padding: 10px;
     margin-bottom: 30px;
     break-inside: avoid;
@@ -199,7 +202,6 @@ body {
 }
 
 .movie-reviews {
-    min-height: 400px;
     min-width: 310px;
     max-width: 310px;
     margin-bottom: 10px;
@@ -210,8 +212,11 @@ body {
     align-items: center;
     align-content: center;
     box-sizing: border-box;
-    border-radius: 10px;
     border: 1px solid black;
+}
+
+.review {
+    border-bottom: 1px solid black;
 }
 
 .review-heading {
@@ -226,7 +231,6 @@ body {
 }
 
 .reviews {
-    height: 100%;
     max-width: 310px;
     min-width: 310px;
     max-height: 400px;
@@ -243,8 +247,6 @@ body {
 }
 
 .review-section {
-    max-height: 100%;
-    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -253,13 +255,11 @@ body {
 .actors {
     min-width: 310px;
     max-width: 310px;
-    min-height: 400px;
-    max-height: 400px;
     display: flex; 
     flex-direction: column;
-    border-radius: 10px;
     border: 1px solid black;
     break-inside: avoid;
+    margin-bottom: 30px;
 }
 
 .actors-heading {
@@ -278,8 +278,6 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
-    overflow-y: auto;
-    max-height: 100%;
     z-index: 0
 }
 
@@ -290,12 +288,12 @@ body {
 }
 
 .actor-profile {
-    min-height: 150px;
-    max-height: 150px;
+    min-height: 100px;
+    max-height: 100px;
 }
 
 .actor-image {
-    height: 150px;
+    height: 100px;
     width: auto;
     float: left;
     margin-right: 10px;
@@ -312,7 +310,7 @@ body {
 }
 
 .actor-info {
-    height: 150px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -333,14 +331,8 @@ body {
     font-weight: 200;
 }
 
-.cast-list {
-    overflow: auto;
-    max-height: 90%;
-}
-
 .clips {
     border: 1px solid black;
-    min-height: 400px;
     min-width: 310px;
     max-width: 310px;
     margin: 10px 0;
@@ -350,7 +342,6 @@ body {
 }
 
 .clips-section {
-    max-height: 90%;
     display: flex;
     flex-direction: column;
 }
@@ -360,7 +351,6 @@ body {
     border-bottom: 1px solid black;
     padding: 10px 0;
     margin: 0;
-    max-height: 10%;
     width: 100%;
 }
 
@@ -375,21 +365,26 @@ body {
     border: 1px solid black;
     margin: 10px;
     width: 95%;
-    height: 102px;
 }
 
 .clip-list-item p {
     margin: 0;
+    font-size: .75em;
 }
 
-.clip-thumbnail, .clip-thumbnail img {
+.clip-thumbnail{
     height: 100px;
-    width: 100xp;
+    width: 100px;
+    margin-right: 10px;
     float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.clip-thumbnail {
-    margin-right: 10px;
+.clip-thumbnail img {
+    width: 100px;
+    height: auto;
 }
 
 .clip-information {
@@ -397,16 +392,16 @@ body {
     overflow-y: auto;
 }
 
-.clip-name {
+.clip-name {clip
     font-weight: 600;
     font-size: 18px;
 }
 
 .clip-channel {
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 4clip00;
     margin-bottom: 4px !important;
-    border-bottom: 1px solid black;
+    border-bottom:clipclip 1px solid black;
 }
 
 .clip-description {
@@ -429,22 +424,24 @@ body {
 @media screen and (min-width: 700px) {
     .content {
         width: 90vw;
-        height: 100%;
         max-width: initial;
     }
 
     .movie-page {
-        column-count: 2;
-        column-width: 300px;
-        column-gap: 30px;
-        column-fill: balance;
-        display: inline;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 
     .main-movie-poster {
         height: auto;
-        width: 75%;
+        width: 45%;
+        max-height: 100%;
+        padding-right: 5%;
     }
+    
     .main-movie-poster img {
         height: auto;
         width: 100%;
@@ -452,14 +449,14 @@ body {
 
     .movie-information {
         margin: 30px 0 0 0;
+        max-width: 45%;
+        min-width: 45%;
     }
 
     .actors {
         display: flex;
         flex-direction: column;
         min-width: 100%;
-        height: auto;
-        max-height: 50%;
     }
 
     .actor {
@@ -479,6 +476,8 @@ body {
         margin: 30px 0 0 auto;
         break-inside: avoid;
         min-height: initial;
+        max-width: 45%;
+        min-width: 45%;
     }
 
     .review-section {
@@ -488,8 +487,6 @@ body {
 
     .review {
         margin: 20px;
-        border: 1px solid black;
-        border-radius: 10px;
         font-size: 26px;
     }
 
@@ -505,10 +502,18 @@ body {
 
     .clips {
         margin: 30px 0;
-        border-radius: 10px;
         display: inline-block;
         min-width: initial;
         max-width: initial;
+    }
+
+    .clip-thumbnail {
+        width: 133px;
+    }
+
+    .clip-thumbnail img {
+        width: 100%;
+        height: auto;
     }
 
     .clip-list {
@@ -527,10 +532,6 @@ body {
     .content {
         max-width: 1200px !important;
     }
-    .movie-page {
-        column-count: 2;
-        column-width: 600px;
-    }
 
     .results-list {
         column-count: 3;
@@ -538,11 +539,6 @@ body {
         column-fill: balance;
     }    
 
-    .main-movie-poster {
-        height: auto;
-        width: 45%;
-        max-height: 100%;
-    }
     .main-movie-poster img {
         height: auto;
         width: 100%;
@@ -568,8 +564,6 @@ body {
 
     .review {
         margin: 20px;
-        border: 1px solid black;
-        border-radius: 10px;
         font-size: 26px;
     }
 
