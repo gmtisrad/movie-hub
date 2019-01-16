@@ -6,7 +6,8 @@ function renderLandingPage () {
     $('.js-hero').empty();
     $('.js-hero').html(landingPage);
     handleSearch();
-    handleNavClick();
+    handleSearchClick();
+    handleAboutClick();
 }
 
 function createNav () {
@@ -14,30 +15,45 @@ function createNav () {
     <nav class='nav-bar'>
         <a href='' class='nav-item nav-title nav-left js-nav-title'>Movie Hub</a>
         <a href='' class='nav-item nav-right js-nav-search'>Search</a>
-        <a href='' class='nav-item nav-right js-nav-contact'>Contact</a>
+        <a href='' class='nav-item nav-right js-nav-About'>About</a>
     </nav>`;
 
     return navHtml;
 }
 
-//TODO: Fix this garbage
-function handleNavClick () {
-    $('.nav-bar').on('click', 'a', function(event) {
+function handleSearchClick () {
+    $('.js-nav-search').on('click', function(event) {
         event.preventDefault();
-        let option = $(this).text();
-
-        alert (option);
-        /*
-        if ('Movie Hub' == option) {
-            renderLandingPage();
-        }
-        else if ('Search' == option) {
-            renderLandingPage();
-        }
-        else if ('Contact' == option) {
-            alert('Send me an email! (I\'ll fix this later)');
-        }*/
+        renderLandingPage();
     })
+}
+
+function handleAboutClick () {
+    $('.js-nav-About').on('click', function(event) {
+        event.preventDefault();
+        renderAboutPage();
+    })
+}
+
+function renderAboutPage () {
+    let aboutHtml = `
+        <section id='about'>
+            <h3>Hi, I'm Gabe!</h3>
+            <p>I made this project as a part of my API capstone project in my full stack web development program. It's purpose is to help you discover new movies, or even just find more information about a movie you may be interested in watching.</p>
+            <p>Every element in this project is rendered to the screen using Javascript and JQuery. The APIs used are the <a href='https://www.themoviedb.org/'>tMDB API</a>, the <a href='https://www.nytimes.com/reviews/movies'>New York Times Movie Reviews API</a> and the <a href='https://www.youtube.com/'>Youtube Data API</a>.
+            <p>The technologies I used are HTML, CSS, Bootstrap, Javascript and JQuery.</p>
+            <p>Below are a few ways you can contact me!</p>
+            <section class="social-icons">
+                    <a href='https://github.com/gmtisrad'><i class="fa fa-github" style='color: black'></i></a>
+                    <a href='https://codepen.io/Gabe_M_Timm/'><i class="fa fa-codepen" style='color: black'></i></a>
+                    <a href='https://www.linkedin.com/in/gabe-m-timm/'><i class="fa fa-linkedin" style='color: black'></i></a>
+                    <a href='mailto:gabe.m.timm@gmail.com'><i class="fa fa-envelope" style='color: black'></i></a>
+                </section>
+        </section>`
+    $('.js-hero').empty();
+    $('.js-hero').html(createNav() + aboutHtml);
+    handleSearchClick();
+    handleAboutClick();
 }
 
 function createSearch() {
@@ -105,6 +121,8 @@ function renderMoviePage (responseJson) {
     $('.js-hero').html(createNav() + moviePageHtml);
     getYoutubeClips (responseJson.title);
     getMovieReviews (responseJson.title);
+    handleSearchClick();
+    handleAboutClick();
 }
 
 function getYoutubeClips (movieTitle) {
@@ -135,6 +153,8 @@ function renderYoutubeClips (responseJson) {
     youtubeClipsHtml.unshift(`<ul class='clip-list'>`);
     youtubeClipsHtml.push('</ul>');
     $('.clips-section').html(youtubeClipsHtml.join(' '));
+    handleSearchClick();
+    handleAboutClick();
 }
 
 function getMovieReviews (movieTitle) {
@@ -214,6 +234,8 @@ function renderResultsPage(searchQuery, responseJson) {
     $('.js-hero').html(resultsPage);
     handleMovieClick();
     handleReturnClick();
+    handleSearchClick();
+    handleAboutClick();
 }
 
 function handleReturnClick () {
