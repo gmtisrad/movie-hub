@@ -130,7 +130,6 @@ function handleSearch () {
     $('.search-form').on('submit', function(event) {
         event.preventDefault();
         let searchQuery = $('#movie-input').val();
-        console.log(searchQuery);
         getResultsList(searchQuery);
     });
 }
@@ -251,7 +250,7 @@ function getMovieReviews (movieTitle) {
     
     fetch(reviewEndpoint)
     .then(response => response.json())
-    .then(responseJson => renderMovieReviews(responseJson))
+    .then(responseJson => renderMovieReviews(responseJson, movieTitle))
     .catch(error => console.log('An error as occured ' + error));
 }
 
@@ -262,16 +261,18 @@ function getMovieReviews (movieTitle) {
  * Description - The movie review data is converted into html and pushed into an array.
  * The array is then joined and rendered into the 'review-section' element.
  */
-function renderMovieReviews (responseJson) {
+function renderMovieReviews (responseJson, movieTitle) {
     let movieReviews = [];
     //The movie review section's html is both created and rendered here. Could be seperated.
     for (let i = 0; i < responseJson.num_results; i++) {
-        let movieReview = `<li class='review border-bottom border-dark'>
-        <h4><a href='${responseJson.results[i].link.url}'>${responseJson.results[i].headline}</a></h4>
-        <h5>Author: ${responseJson.results[i].byline}</h5>
-        <p>Summary: ${responseJson.results[i].summary_short}</p>
-    </li>`;
-        movieReviews.push(movieReview);
+        if (movieTitle == responseJson.results[i].display_title){
+            let movieReview = `<li class='review border-bottom border-dark'>
+                <h4><a href='${responseJson.results[i].link.url}'>${responseJson.results[i].headline}</a></h4>
+                <h5>Author: ${responseJson.results[i].byline}</h5>
+                <p>Summary: ${responseJson.results[i].summary_short}</p>
+            </li>`;
+            movieReviews.push(movieReview);
+        }
     }
 
     movieReviews.unshift('<ul class=\'reviews-list\'>');
